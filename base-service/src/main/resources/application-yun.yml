@@ -13,7 +13,7 @@ app:
 apollo:
   meta: http://${extraEnvHost}:8080
   bootstrap:
-    namespaces: application,common-mysql
+    namespaces: application,common-mysql,common-redis
     enabled: true
     eagerLoad:
       enabled: false

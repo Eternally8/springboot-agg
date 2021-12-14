@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -37,6 +38,17 @@ public class RedisController extends UnifiedReply {
         userService.getUserByRedisValue(id);
         userService.getUserByRedisTime(id);
         return buildSuccesResp();
+    }
+
+
+    @ApiOperation(value = "redis注解缓存2",notes = "可自定义缓存失效时间和key生成器")
+    @GetMapping(value = "/getUser2")
+    public ResponseEntityDto<UserVoEntity> getUser2(){
+        UserVoEntity vo = new UserVoEntity();
+        vo.setAge(1);
+        vo.setId(2);
+        vo.setName("kkkkk");
+        return buildSuccesResp(userService.getUserByRedisTimeObject(vo));
     }
 
     //接受消息的方法见com.robben.redisMsg.RCMHandler

@@ -48,4 +48,9 @@ public class UserService {
         return userDao.getUserById(id);
     }
 
+    @Cacheable(value = "UserService_getUserByRedisTimeObject#s#100",key = "#p0.id +'::'+#p0.name")
+    public UserVoEntity getUserByRedisTimeObject(UserVoEntity vo) {
+        log.info("~~~~~~~~hanlde-DB~~~~~~~~~~~~~~");
+        return vo;
+    }
 }
