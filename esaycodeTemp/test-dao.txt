@@ -1,0 +1,51 @@
+##定义初始变量
+#set($tableName = $tool.append($tableInfo.name, "Dao"))
+##设置回调
+$!callback.setFileName($tool.append($tableName, ".java"))
+$!callback.setSavePath($tool.append($tableInfo.savePath, "/dao"))
+
+##拿到主键
+#if(!$tableInfo.pkColumn.isEmpty())
+    #set($pk = $tableInfo.pkColumn.get(0))
+#end
+
+#if($tableInfo.savePackageName)package $!{tableInfo.savePackageName}.#{end}dao;
+
+import $!{tableInfo.savePackageName}.entity.$!{tableInfo.name}Entity;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import javax.validation.constraints.*;
+import java.util.List;
+
+@Mapper
+public interface $!{tableName} {
+
+    $!{tableInfo.name}Entity getById(@NotNull $!pk.shortType $!pk.name);
+
+    List<$!{tableInfo.name}Entity> listByEntity($!{tableInfo.name}Entity $!tool.firstLowerCase($!{tableInfo.name})Entity);
+
+    $!{tableInfo.name}Entity getByEntity($!{tableInfo.name}Entity $!tool.firstLowerCase($!{tableInfo.name})Entity);
+
+    List<$!{tableInfo.name}Entity> listByIds(@NotEmpty List<$!pk.shortType> list);
+
+    int insert(@NotNull $!{tableInfo.name}Entity $!tool.firstLowerCase($!{tableInfo.name})Entity);
+
+    int insertBatch(@NotEmpty List<$!{tableInfo.name}Entity> list);
+
+    int update(@NotNull $!{tableInfo.name}Entity $!tool.firstLowerCase($!{tableInfo.name})Entity);
+
+    int updateByField(@NotNull @Param("where") $!{tableInfo.name}Entity where, @NotNull @Param("set") $!{tableInfo.name}Entity set);
+
+    int updateBatch(@NotEmpty List<$!{tableInfo.name}Entity> list);
+
+    int deleteById(@NotNull $!pk.shortType $!pk.name);
+
+    int deleteByEntity(@NotNull $!{tableInfo.name}Entity $!tool.firstLowerCase($!{tableInfo.name})Entity);
+  
+    int deleteByIds(@NotEmpty List<$!pk.shortType> list);
+    
+    int countAll();
+    
+    int countByEntity($!{tableInfo.name}Entity $!tool.firstLowerCase($!{tableInfo.name})Entity);
+    
+}

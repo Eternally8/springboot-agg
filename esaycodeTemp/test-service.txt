@@ -1,0 +1,49 @@
+##定义初始变量
+#set($tableName = $tool.append($tableInfo.name, "ServiceI"))
+
+##设置回调
+$!callback.setFileName($tool.append($tableName, ".java"))
+$!callback.setSavePath($tool.append($tableInfo.savePath, "/service"))
+
+##拿到主键
+#if(!$tableInfo.pkColumn.isEmpty())
+    #set($pk = $tableInfo.pkColumn.get(0))
+#end
+
+#if($tableInfo.savePackageName)package $!{tableInfo.savePackageName}.#{end}service;
+
+import $!{tableInfo.savePackageName}.dao.$!{tableInfo.name}Dao;
+import $!{tableInfo.savePackageName}.entity.$!{tableInfo.name}Entity;
+
+import java.util.List;
+
+public interface $!{tableName} {
+    
+    $!{tableInfo.name}Dao get$!{tableInfo.name}Dao();
+   
+    $!{tableInfo.name}Entity getById($!pk.shortType $!pk.name);
+
+    $!{tableInfo.name}Entity getByEntity($!{tableInfo.name}Entity $!tool.firstLowerCase($!{tableInfo.name})Entity);
+
+    List<$!{tableInfo.name}Entity> listByEntity($!{tableInfo.name}Entity $!tool.firstLowerCase($!{tableInfo.name})Entity);
+
+    List<$!{tableInfo.name}Entity> listByIds(List<$!pk.shortType> ids);
+
+    int insert($!{tableInfo.name}Entity $!tool.firstLowerCase($!{tableInfo.name})Entity);
+
+    int insertBatch(List<$!{tableInfo.name}Entity> list);
+
+    int update($!{tableInfo.name}Entity $!tool.firstLowerCase($!{tableInfo.name})Entity);
+
+    int updateBatch(List<$!{tableInfo.name}Entity> list);
+
+    int deleteById($!pk.shortType $!pk.name);
+
+    int deleteByEntity($!{tableInfo.name}Entity $!tool.firstLowerCase($!{tableInfo.name})Entity);
+  
+    int deleteByIds(List<$!pk.shortType> list);
+    
+    int countAll();
+    
+    int countByEntity($!{tableInfo.name}Entity $!tool.firstLowerCase($!{tableInfo.name})Entity);
+}

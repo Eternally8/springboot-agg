@@ -1,0 +1,68 @@
+##定义初始变量
+#set($tableName = $tool.append($tableInfo.name, "Controller"))
+###重新设定变量名称
+###set($!{tableInfo.name} = $tool.append($tableInfo.name, "Entity"))
+##设置回调
+$!callback.setFileName($tool.append($tableName, ".java"))
+$!callback.setSavePath($tool.append($tableInfo.savePath, "/controller"))
+##拿到主键
+#if(!$tableInfo.pkColumn.isEmpty())
+    #set($pk = $tableInfo.pkColumn.get(0))
+#end
+
+#if($tableInfo.savePackageName)package $!{tableInfo.savePackageName}.#{end}controller;
+
+import $!{tableInfo.savePackageName}.entity.$!{tableInfo.name}Entity;
+import $!{tableInfo.savePackageName}.service.$!{tableInfo.name}ServiceI;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
+@RestController
+@RequestMapping("/$!tool.firstLowerCase($tableInfo.name)")
+public class $!{tableName} {
+    
+    @Autowired
+    private $!{tableInfo.name}ServiceI $!tool.firstLowerCase($tableInfo.name)Service;
+
+    @GetMapping("/get/{$!pk.name}")
+    public $!{tableInfo.name}Entity getById(@PathVariable $!pk.shortType $!pk.name) {
+        $!{tableInfo.name}Entity $!tool.firstLowerCase($tableInfo.name)Entity = $!{tool.firstLowerCase($tableInfo.name)}Service.getById(id);
+        return $!tool.firstLowerCase($tableInfo.name)Entity!=null?$!tool.firstLowerCase($tableInfo.name)Entity:new $!{tableInfo.name}Entity();
+    }
+
+    @GetMapping("/get")
+    public $!{tableInfo.name}Entity getByEntity($!{tableInfo.name}Entity $!tool.firstLowerCase($tableInfo.name)Entity) {
+        return $!{tool.firstLowerCase($tableInfo.name)}Service.getByEntity($!{tool.firstLowerCase($!{tableInfo.name})}Entity);
+    }
+
+    @GetMapping("/list")
+    public List<$!{tableInfo.name}Entity> list($!{tableInfo.name}Entity $!tool.firstLowerCase($tableInfo.name)Entity) {
+        List<$!{tableInfo.name}Entity> $!{tool.firstLowerCase($tableInfo.name)}EntityList = $!{tool.firstLowerCase($tableInfo.name)}Service.listByEntity($!{tool.firstLowerCase($!{tableInfo.name})}Entity);
+        return $!{tool.firstLowerCase($tableInfo.name)}EntityList;
+    }
+
+    @PostMapping("/insert")
+    public $!{tableInfo.name}Entity insert(@RequestBody $!{tableInfo.name}Entity $!tool.firstLowerCase($tableInfo.name)Entity){
+        $!{tool.firstLowerCase($tableInfo.name)}Service.insert($!tool.firstLowerCase($tableInfo.name)Entity);
+        return $!tool.firstLowerCase($tableInfo.name)Entity;
+    }
+
+    @PutMapping("/update")
+    public int update(@RequestBody $!{tableInfo.name}Entity $!tool.firstLowerCase($tableInfo.name)Entity){
+        return $!{tool.firstLowerCase($tableInfo.name)}Service.update($!tool.firstLowerCase($tableInfo.name)Entity);
+    }
+
+    @DeleteMapping("/delete/{$!pk.name}")
+    public int deleteOne(@PathVariable $!pk.shortType $!pk.name){
+        return $!{tool.firstLowerCase($tableInfo.name)}Service.deleteById($!pk.name);
+    }
+
+    @DeleteMapping("/delete")
+    public int deleteBatch(@RequestBody List<$!pk.shortType> $!{pk.name}s){
+        int result = 0;
+        if ($!{pk.name}s!=null&&$!{pk.name}s.size()>0) result = $!{tool.firstLowerCase($tableInfo.name)}Service.deleteByIds($!{pk.name}s);
+        return result;
+    }
+
+}
