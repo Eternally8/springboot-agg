@@ -29,17 +29,13 @@ public class RedisController extends UnifiedReply {
 
 
     @ApiOperation(value = "redis注解缓存",notes = "可自定义缓存失效时间和key生成器")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id",value="id",required = true)
-    })
     @GetMapping(value = "/getUser")
-    public ResponseEntityDto<UserVoEntity> getUser(int id){
+    public ResponseEntityDto<UserVoEntity> getUser(@RequestParam int id){
         userService.getUserByRedis(id);
         userService.getUserByRedisValue(id);
         userService.getUserByRedisTime(id);
         return buildSuccesResp();
     }
-
 
     @ApiOperation(value = "redis注解缓存2",notes = "可自定义缓存失效时间和key生成器")
     @GetMapping(value = "/getUser2")
@@ -53,11 +49,8 @@ public class RedisController extends UnifiedReply {
 
     //接受消息的方法见com.robben.redisMsg.RCMHandler
     @ApiOperation(value = "测试redis发布订阅消息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "msg",value="消息内容",required = true)
-    })
     @GetMapping(value = "/sendRedisMsg")
-    public String sendRedisMsg(String msg){
+    public String sendRedisMsg(@RequestParam String msg){
         redisUtils.convertAndSend(RedisMQChannels.redisChannelTest1,msg);
         redisUtils.convertAndSend(RedisMQChannels.redisChannelTest2,msg);
 

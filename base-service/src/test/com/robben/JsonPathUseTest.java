@@ -36,7 +36,7 @@ public class JsonPathUseTest {
         String gender1 = ctx.read("$.name1");
         System.out.println(gender1 == null);
 
-        JsonPath.parse(hit).put("$.store.book[0]", "category", "111111111");
+        JsonPath.parse(d).put("$.store.book[0]", "category", "111111111");
 
     }
 
