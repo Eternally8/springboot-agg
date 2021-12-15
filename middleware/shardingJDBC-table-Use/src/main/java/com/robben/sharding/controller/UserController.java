@@ -36,12 +36,10 @@ public class UserController {
     @ApiOperation("存储用户")
     @GetMapping("/add")
     public boolean add() {
-        for (int i = 0; i < 2; i++) {
-            UserEntity u = new UserEntity();
-            u.setSId(SystemClock.now());
-            u.setName("haha" + i);
-            userMapper.insert(u);
-        }
+        UserEntity u = new UserEntity();
+        u.setSId(SystemClock.now());
+        u.setName("haha");
+        userMapper.insert(u);
         return true;
     }
 

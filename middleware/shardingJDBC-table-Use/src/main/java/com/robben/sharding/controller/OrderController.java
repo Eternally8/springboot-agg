@@ -29,12 +29,10 @@ public class OrderController {
     @ApiOperation("存储订单")
     @GetMapping("/add")
     public boolean add() {
-        for (int i = 0; i < 2; i++) {
-            MyOrderEntity u = new MyOrderEntity();
-            u.setSId(SystemClock.now());
-            u.setName("haha" + i);
-            orderMapper.insert(u);
-        }
+        MyOrderEntity u = new MyOrderEntity();
+        u.setSId(SystemClock.now());
+        u.setName("haha");
+        orderMapper.insert(u);
         return true;
     }
 

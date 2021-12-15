@@ -18,15 +18,14 @@ apollo:
 
 
 spring:
-  main:
-    allow-bean-definition-overriding: true
   shardingsphere:
     datasource:
       names: ds0
       ds0:
-        type: com.alibaba.druid.pool.DruidDataSource
+        #注意如果选择druid的连接池,需要换成字段jdbc-url为url
+        type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://${extraEnvHost}:3306/sharding?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&rewriteBatchedStatements=true
+        jdbc-url: jdbc:mysql://${extraEnvHost}:3306/sharding?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&rewriteBatchedStatements=true
         username: ${jdbc.username}
         password: ${jdbc.pwd}
     sharding:
