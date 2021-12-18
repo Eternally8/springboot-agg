@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class OtherService {
+public class ThreadPoolService {
 
     @Autowired
     private OtherUtils otherUtils;

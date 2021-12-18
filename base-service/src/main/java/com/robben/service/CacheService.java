@@ -2,48 +2,20 @@ package com.robben.service;
 
 import com.robben.dao.UserDao;
 import com.robben.model.UserVoEntity;
-import com.robben.utils.SpringBeanTools;
-import com.robben.utils.StartRunFrist;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-
 @Slf4j
 @Service
 @EnableCaching
-public class UserService {
-
-    private UserService userService2;
+public class CacheService {
 
     @Autowired
     private UserDao userDao;
 
-    @PostConstruct
-    public void init(){
-        //此方法调用不了
-        userService2 = SpringBeanTools.getBean("userService");
-    }
-
-
-    public void insertUser(UserVoEntity vo) {
-         userDao.insertUser(vo);
-    }
-
-    public UserVoEntity getUserById(int id) {
-        return userDao.getUserById(id);
-    }
-
-    public int updateUser(UserVoEntity vo) {
-        return userDao.updateUser(vo);
-    }
-
-    public int delUserById(int id) {
-        return userDao.delUserById(id);
-    }
 
     @Cacheable(value = "UserService_getUserByRedisTime#s#100")
     public UserVoEntity getUserByRedisTime(int id) {
@@ -67,12 +39,5 @@ public class UserService {
         log.info("~~~~~~~~hanlde-DB~~~~~~~~~~~~~~");
         return vo;
     }
-
-    public void postConstructTest() {
-        userService2.getUserByRedis(1);
-    }
-
-
-
 
 }

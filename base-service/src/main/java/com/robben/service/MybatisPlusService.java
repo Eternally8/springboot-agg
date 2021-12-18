@@ -14,9 +14,9 @@ import java.util.List;
 @Service
 public class MybatisPlusService {
 
-
     @Autowired
     private UserMbplusInfoMapper userMbplusInfoMapper;
+
 
     public void insertUser(UserMbplusInfoEntity vo) {
         userMbplusInfoMapper.insert(vo);

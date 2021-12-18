@@ -1,6 +1,6 @@
 package com.robben;
 
-import com.robben.service.UserService;
+import com.robben.service.CacheService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,14 +14,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class starterTest {
 
     @Autowired
-    private UserService userService;
+    private CacheService userService;
 
     //测试的话需要注释掉websocket相关的类,在config文件夹下
     @Test
     public void test1(){
-        userService.postConstructTest();
 
-        userService.postConstructTest();
+
+
+
     }
 
 

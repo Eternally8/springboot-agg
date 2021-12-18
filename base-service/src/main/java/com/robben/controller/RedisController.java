@@ -2,13 +2,11 @@ package com.robben.controller;
 
 import com.robben.config.RedisConfig.RedisMQChannels;
 import com.robben.model.UserVoEntity;
-import com.robben.service.UserService;
+import com.robben.service.CacheService;
 import com.robben.utils.RedisUtils;
 import com.robben.utils.reqResult.ResponseEntityDto;
 import com.robben.utils.reqResult.UnifiedReply;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/redis")
 public class RedisController extends UnifiedReply {
     @Autowired
-    private UserService userService;
+    private CacheService cacheService;
     @Autowired
     private RedisUtils redisUtils;
 
@@ -31,9 +29,9 @@ public class RedisController extends UnifiedReply {
     @ApiOperation(value = "redis注解缓存",notes = "可自定义缓存失效时间和key生成器")
     @GetMapping(value = "/getUser")
     public ResponseEntityDto<UserVoEntity> getUser(@RequestParam int id){
-        userService.getUserByRedis(id);
-        userService.getUserByRedisValue(id);
-        userService.getUserByRedisTime(id);
+        cacheService.getUserByRedis(id);
+        cacheService.getUserByRedisValue(id);
+        cacheService.getUserByRedisTime(id);
         return buildSuccesResp();
     }
 
@@ -44,7 +42,7 @@ public class RedisController extends UnifiedReply {
         vo.setAge(1);
         vo.setId(2);
         vo.setName("kkkkk");
-        return buildSuccesResp(userService.getUserByRedisTimeObject(vo));
+        return buildSuccesResp(cacheService.getUserByRedisTimeObject(vo));
     }
 
     //接受消息的方法见com.robben.redisMsg.RCMHandler
