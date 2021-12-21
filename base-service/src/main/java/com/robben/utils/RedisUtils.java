@@ -3,6 +3,7 @@ package com.robben.utils;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -81,7 +82,7 @@ public class RedisUtils {
      * @param msg
      */
     public void convertAndSend(String channel,String msg){
-        stringRedisTemplate.convertAndSend(channel,msg);
+        redisTemplate.convertAndSend(channel,msg);
     }
 
 
@@ -226,9 +227,9 @@ public class RedisUtils {
      * @param key 键
      * @return
      */
-//	public Set<Object> members(String key) {
-//		return redisTemplate.opsForSet().members(key);
-//	}
+	public Set<Object> members(String key) {
+		return redisTemplate.opsForSet().members(key);
+	}
 
     /**
      * 随机获取变量中指定个数的元素
@@ -323,9 +324,35 @@ public class RedisUtils {
      * @param destKey 键
      * @return
      */
-//	public Set<Set> difference(String key, String destKey) {
-//		return redisTemplate.opsForSet().difference(key, destKey);
-//	}
+	public Set<Set> difference(String key, String destKey) {
+		return redisTemplate.opsForSet().difference(key, destKey);
+	}
+
+    /**
+     * 弹出元素并删除
+     *
+     * @param key 键
+     * @return
+     */
+    public String popValue(String key) {
+        return redisTemplate.opsForSet().pop(key).toString();
+    }
+
+
+    //- - - - - - - - - - - - - - - - - - - - -  Zset类型 - - - - - - - - - - - - - - - - - - - -
+    public boolean addzset(String key,String value,double value2) {
+        return redisTemplate.opsForZSet().add(key,value,value2);
+    }
+
+    public Set<T> zsetRange(String key, long start, long end) {
+        return redisTemplate.opsForZSet().range(key,start,end);
+    }
+
+    public Set<T> zsetRangeByScore(String key, double startScore, double endScore) {
+        return redisTemplate.opsForZSet().rangeByScore(key,startScore,endScore);
+    }
+
+
 
 
     //- - - - - - - - - - - - - - - - - - - - -  hash类型 - - - - - - - - - - - - - - - - - - - -
@@ -384,15 +411,7 @@ public class RedisUtils {
         return (Integer) redisTemplate.opsForHash().get("map1", "key1");
     }
 
-    /**
-     * 弹出元素并删除
-     *
-     * @param key 键
-     * @return
-     */
-    public String popValue(String key) {
-        return redisTemplate.opsForSet().pop(key).toString();
-    }
+
 
     /**
      * 删除指定 hash 的 HashKey
