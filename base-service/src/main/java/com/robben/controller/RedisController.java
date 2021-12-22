@@ -4,6 +4,7 @@ import com.robben.config.RedisConfig.RedisMQChannels;
 import com.robben.config.RedisConfig.RedissonConfig;
 import com.robben.model.UserVoEntity;
 import com.robben.service.CacheService;
+import com.robben.utils.Contants;
 import com.robben.utils.RedisUtils;
 import com.robben.utils.reqResult.ResponseEntityDto;
 import com.robben.utils.reqResult.UnifiedReply;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,9 +34,12 @@ public class RedisController extends UnifiedReply {
     private RedisUtils redisUtils;
     @Autowired
     private RedissonClient redissonClient;
+    @Qualifier(Contants.MY_EXECUTOR)
     @Autowired
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
+
+    private int testValue = 0;
 
 
     @ApiOperation(value = "redis注解缓存",notes = "可自定义缓存失效时间和key生成器")
@@ -114,6 +119,32 @@ public class RedisController extends UnifiedReply {
         }
         return true;
     }
+
+
+    @ApiOperation(value = "测试并发问题")
+    @GetMapping(value = "/testLock")
+    public int testLock(){
+        testValue = testValue + 1;
+
+//        RLock lock = redissonClient.getLock("anyLock");
+//        try{
+//            lock.lockAsync();
+//            lock.lockAsync(10, TimeUnit.SECONDS);
+//            Future<Boolean> res = lock.tryLockAsync(3, 10, TimeUnit.SECONDS);
+//
+//            if(res.get()){
+//                // do your business
+//            }
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } finally {
+//            lock.unlock();
+//        }
+        return testValue;
+    }
+
 
 
 }
