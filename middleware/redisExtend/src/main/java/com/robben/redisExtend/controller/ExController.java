@@ -38,7 +38,6 @@ public class ExController {
 
         Field jedisField = ReflectionUtils.findField(JedisConnection.class, "jedis");
         ReflectionUtils.makeAccessible(jedisField);
-        System.out.println(connectionFactory.getConnection());
         Jedis jedis = (Jedis) ReflectionUtils.getField(jedisField, connectionFactory.getConnection());
 
 
