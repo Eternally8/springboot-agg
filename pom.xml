@@ -17,6 +17,7 @@
         <module>zsf</module>
         <module>base-service</module>
         <module>middleware/shardingJDBC-table2-Use</module>
+        <module>middleware/redisExtend</module>
     </modules>
 
     <!--SpringBoot的父依赖启动 -->
@@ -64,6 +65,8 @@
 
         <!-- 这个jar比较奇怪不加会导致sentinel-springCloud启动失败-->
         <hibernate-validator.version>6.0.18.Final</hibernate-validator.version>
+
+        <apollo.client.version>1.8.0</apollo.client.version>
     </properties>
 
     <dependencies>

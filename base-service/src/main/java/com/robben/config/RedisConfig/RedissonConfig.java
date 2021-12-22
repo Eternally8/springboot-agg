@@ -6,19 +6,24 @@ import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@SpringBootConfiguration
+@Configuration
 public class RedissonConfig {
 
     @Value("${spring.redis.host}")
     private String redisHost;
     @Value("${spring.redis.port}")
     private String redisPort;
+    @Value("${redis.pwd}")
+    private String redisPwd;
 
     @Bean
     public RedissonClient redissonClient() {
         Config config = new Config();
-        config.useSingleServer().setAddress("redis://" + redisHost + ":" + redisPort);
+        config.useSingleServer()
+                .setAddress("redis://" + redisHost + ":" + redisPort)
+                .setPassword(redisPwd);
         return Redisson.create(config);
     }
 
