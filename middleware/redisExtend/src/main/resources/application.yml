@@ -16,7 +16,7 @@ apollo:
 
 spring:
   redis:
-    database: 6
+#    database: 6
     host: ${extraEnvHost}
     port: 6379
     password: ${redis.pwd}

@@ -1,20 +1,19 @@
 package com.robben.redisExtend.controller;
 
-import com.robben.redisExtend.config.JedisCompent;
+import cn.hutool.core.date.SystemClock;
+import com.redislabs.modules.rejson.JReJSON;
+import com.redislabs.modules.rejson.Path;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.jedis.JedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 
-import java.lang.reflect.Field;
+import java.util.Arrays;
 
 
 @Slf4j
@@ -22,29 +21,64 @@ import java.lang.reflect.Field;
 @RestController
 @RequestMapping("/redis")
 public class ExController {
-
     @Autowired
     private RedisTemplate redisTemplate;
     @Autowired
-    private JedisCompent jedisCompent;
+    private JReJSON jReJSON;
     @Autowired
-    private RedisConnectionFactory connectionFactory;
+    private Jedis jedis;
 
+    @ApiOperation(value = "redisJSON的使用")
+    @GetMapping(value = "/useRedisJSON")
+    public int useRedisJSON(){
+        long stime = SystemClock.now();
 
-    @ApiOperation(value = "test")
-    @GetMapping(value = "/test")
-    public int test(){
-        redisTemplate.opsForValue().set("kakakakka","asdf");
+        jedis.set("kkkk","asdfasdf");
 
-        Field jedisField = ReflectionUtils.findField(JedisConnection.class, "jedis");
-        ReflectionUtils.makeAccessible(jedisField);
-        Jedis jedis = (Jedis) ReflectionUtils.getField(jedisField, connectionFactory.getConnection());
+        String testJsonObjectName = "robben";
+        jReJSON.set(testJsonObjectName,new Object());
+        jReJSON.set(testJsonObjectName,21,new Path(".age"));
+        jReJSON.set(testJsonObjectName,"zhangsan",new Path(".name"));
+        jReJSON.set(testJsonObjectName,"hello",new Path(".msg"));
+        jReJSON.set(testJsonObjectName, Arrays.asList(9,8,7),new Path(".arr"));
+        Object result = jReJSON.get(testJsonObjectName);
+        log.info("目前的对象:{}",result.toString());
 
+        jReJSON.set(testJsonObjectName,"lisi",new Path(".name"));
+        result = jReJSON.get(testJsonObjectName);
+        log.info("设置 name=lisi,结果:{}",result.toString());
 
-        jedis.set("kasdf1","123123");
+        jReJSON.arrAppend(testJsonObjectName, new Path(".arr"), 21);
+        result = jReJSON.get(testJsonObjectName);
+        log.info("在数组追加一个值：21,结果:{}",result.toString());
+        result = jReJSON.get(testJsonObjectName);
+        log.info("在数组追加一个值：21,结果:{}",result.toString());
+        log.info("总耗时:{}", SystemClock.now() - stime);
         return 0;
     }
 
+
+//    @ApiOperation(value = "redisJSON的使用2")
+//    @GetMapping(value = "/useRedisJSON2")
+//    public int useRedisJSON2(){
+//        long stime = SystemClock.now();
+//        for (int i = 0; i < 1000; i++) {
+//            redisTemplate.opsForValue().set("lll","123fff" + i);
+//        }
+//        log.info("test1:{}ms",SystemClock.now() - stime);
+//
+//
+//        String testJsonObjectName = "robben2";
+//        long stime2 = SystemClock.now();
+//        for (int i = 0; i < 1000; i++) {
+//            jReJSON.set(testJsonObjectName,"zhangsan"+i,new Path(".name"));
+//        }
+//        log.info("test2:{}ms",SystemClock.now() - stime2);
+//
+//        jReJSON.set(testJsonObjectName,"zhangsanasdfasdfasdf",new Path(".name"));
+//
+//        return 0;
+//    }
 
 
 
