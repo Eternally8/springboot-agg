@@ -19,8 +19,8 @@ import java.util.Arrays;
 @Slf4j
 @Api(tags = "redis使用")
 @RestController
-@RequestMapping("/redis")
-public class ExController {
+@RequestMapping("/json")
+public class JsonController {
     @Autowired
     private RedisTemplate redisTemplate;
     @Autowired
