@@ -53,7 +53,7 @@ public class VaildParamController {
 
     @ApiOperation("单参数校验")
     @PostMapping(value = "/valid/test3")
-    public String test3(@Email String email){
+    public String test3(@Email @RequestParam String email){
         return "success";
     }
 

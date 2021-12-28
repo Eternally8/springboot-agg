@@ -1,5 +1,8 @@
 package com.robben.model;
 
+import com.robben.annotation.EnumValidAnnotation;
+import com.robben.annotation.ProductTypeEnum;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -50,5 +53,10 @@ public class ValidVo {
 
     @NotEmpty(message = "级别不能为空")
     private String level;
+
+    @EnumValidAnnotation(message = "商品类型输入错误",target = ProductTypeEnum.class )
+    @ApiModelProperty(value = "类型")
+    private String type;
+
 }
 

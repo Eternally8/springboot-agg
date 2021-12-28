@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-
+    //设置响应码
     @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
     @ExceptionHandler(value = {BindException.class, ValidationException.class, MethodArgumentNotValidException.class})
     public ResponseEntityDto handleValidatedException(Exception e) {
