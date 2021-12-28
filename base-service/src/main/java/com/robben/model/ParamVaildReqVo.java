@@ -1,6 +1,6 @@
 package com.robben.model;
 
-import com.robben.annotation.EnumValidAnnotation;
+import com.robben.annotation.validParam.EnumValidAnnotation;
 import com.robben.annotation.ProductTypeEnum;
 import com.robben.constant.ParamVaildAdd;
 import io.swagger.annotations.ApiModelProperty;

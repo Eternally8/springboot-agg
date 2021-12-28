@@ -1,4 +1,4 @@
-package com.robben.annotation;
+package com.robben.annotation.validParam;
 
 
 import javax.validation.Constraint;

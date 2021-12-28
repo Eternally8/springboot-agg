@@ -1,6 +1,7 @@
 package com.robben.controller;
 
 import com.robben.annotation.AuthToken;
+import com.robben.annotation.validParam.ValidGroup;
 import com.robben.model.ValidVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -56,5 +57,13 @@ public class VaildParamController {
     public String test3(@Email @RequestParam String email){
         return "success";
     }
+
+
+    @ApiOperation("RequestBody校验-分组")
+    @PostMapping("/valid/test4")
+    public String test4(@Validated(ValidGroup.Crud.Create.class) @RequestBody ValidVo validVO){
+        return "success";
+    }
+
 
 }

@@ -1,14 +1,13 @@
 package com.robben.model;
 
-import com.robben.annotation.EnumValidAnnotation;
+import com.robben.annotation.validParam.EnumValidAnnotation;
 import com.robben.annotation.ProductTypeEnum;
+import com.robben.annotation.validParam.ValidGroup;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.*;
 
 
 /**
@@ -57,6 +56,12 @@ public class ValidVo {
     @EnumValidAnnotation(message = "商品类型输入错误",target = ProductTypeEnum.class )
     @ApiModelProperty(value = "类型")
     private String type;
+
+
+    @Null(groups = ValidGroup.Crud.Create.class, message = "应用IC必须为空")
+    @NotNull(groups = ValidGroup.Crud.Update.class, message = "应用ID不能为空")
+    @ApiModelProperty(value = "类型")
+    private String param;
 
 }
 
