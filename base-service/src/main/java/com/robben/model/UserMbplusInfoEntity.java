@@ -24,8 +24,12 @@ public class UserMbplusInfoEntity {
     private Integer age;
     private String workInfo;
 
-    //这个功能是MySQL5.7.8后增加的,在MySQL8.0中得到了大幅增强 https://blog.csdn.net/qq_38688267/article/details/107386138
-    //更多的sql语法细节可参考 https://dev.mysql.com/doc/refman/8.0/en/json.html
+    /**
+     *  这个功能是MySQL5.7.8后增加的,在MySQL8.0中得到了大幅增强 https://blog.csdn.net/qq_38688267/article/details/107386138
+     *  推荐使用MySQL 8.0.17版本
+     *  更多的sql语法细节可参考 https://dev.mysql.com/doc/refman/8.0/en/json.html
+     *  JSON 数据类型推荐使用在不经常更新的静态数据存储
+     */
     @TableField(typeHandler = FastjsonTypeHandler.class)
     private DescInfoVo descInfo;
 
