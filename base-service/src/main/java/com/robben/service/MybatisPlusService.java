@@ -22,11 +22,6 @@ public class MybatisPlusService {
         userMbplusInfoMapper.insert(vo);
     }
 
-    public UserMbplusInfoEntity getUserById(Integer id) {
-        return userMbplusInfoMapper.selectById(id);
-    }
-
-
     public UserMbplusInfoEntity updateUser(UserMbplusInfoEntity vo) {
         int updateCount = userMbplusInfoMapper.updateById(vo);
         log.info("mybaits-plus更新的数量:{}",updateCount);
@@ -40,4 +35,7 @@ public class MybatisPlusService {
         q.like("name", name);
         return userMbplusInfoMapper.selectList(q);
     }
+
+
+
 }
