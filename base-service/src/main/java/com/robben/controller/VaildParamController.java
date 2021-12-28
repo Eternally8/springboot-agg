@@ -1,18 +1,18 @@
 package com.robben.controller;
 
 import com.robben.annotation.AuthToken;
-import com.robben.constant.ParamVaildAdd;
-import com.robben.model.ParamVaildReqVo;
-import com.robben.utils.exception.VaildParam;
+import com.robben.model.ValidVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Email;
+
 @Slf4j
 @Api(tags = "权限校验",value="一个自定义的注解用于校验权限")
+@Validated
 @RestController
 @RequestMapping("/anno")
 public class VaildParamController {
@@ -39,14 +39,22 @@ public class VaildParamController {
     }
 
 
-    //可以增加分组来对不多接口传入同一个实体类的参数做校验
-    @ApiOperation(value = "注解参数校验")
-    @PostMapping("/getUser")
-    public String getUserStr(@RequestBody @Validated({ParamVaildAdd.class}) ParamVaildReqVo user,
-                             BindingResult bindingResult) {
-        VaildParam.validData(bindingResult);
+    @ApiOperation("RequestBody校验")
+    @PostMapping("/valid/test1")
+    public String test1(@Validated @RequestBody ValidVo validVO){
         return "success";
     }
 
+    @ApiOperation("Form校验")
+    @PostMapping(value = "/valid/test2")
+    public String test2(@Validated ValidVo validVO){
+        return "success";
+    }
+
+    @ApiOperation("单参数校验")
+    @PostMapping(value = "/valid/test3")
+    public String test3(@Email String email){
+        return "success";
+    }
 
 }
