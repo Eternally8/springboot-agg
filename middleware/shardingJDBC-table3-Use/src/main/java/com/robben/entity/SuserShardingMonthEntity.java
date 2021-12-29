@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("suser_sharding")
-public class SuserShardingEntity {
+@TableName("suser_sharding_month")
+public class SuserShardingMonthEntity {
 
 
     private Long id;

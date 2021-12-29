@@ -1,8 +1,8 @@
 package com.robben.controller;
 
 
-import com.robben.mapper.SuserShardingMapper;
-import com.robben.entity.SuserShardingEntity;
+import com.robben.entity.SuserEntity;
+import com.robben.mapper.SuserMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,34 +16,32 @@ import org.springframework.web.bind.annotation.RestController;
  * Author: robben
  * Date: 2021/12/2 10:04
  */
-@Api(tags = "分表用户服务", value="用户服务2")
+@Api(tags = "用户服务", value="用户服务2")
 @RestController
-@RequestMapping("/feature2")
-public class SuserShardingController {
+@RequestMapping("/feature1")
+public class SuserController {
 
     @Autowired
-    private SuserShardingMapper suserShardingMapper;
+    private SuserMapper userMapper;
 
 
-    @ApiOperation("分表存储用户")
+    @ApiOperation("存储用户")
     @GetMapping("/user/save")
     public String save() {
         for (int i = 0; i <2 ; i++) {
-            SuserShardingEntity user = new SuserShardingEntity();
+            SuserEntity user=new SuserEntity();
             user.setName("test"+i);
-            user.setShardingIndex(123l + i);
-            suserShardingMapper.insert(user);
+            userMapper.insert(user);
         }
         return "success";
     }
 
 
-    @ApiOperation("分表获取用户")
+    @ApiOperation("获取用户")
     @GetMapping("/user/get")
-    public SuserShardingEntity get(@RequestParam Long id) {
-        SuserShardingEntity user =  suserShardingMapper.selectById(id);
+    public SuserEntity get(@RequestParam Long id) {
+        SuserEntity user =  userMapper.selectById(id);
         System.out.println(user.getId());
         return user;
     }
-
 }

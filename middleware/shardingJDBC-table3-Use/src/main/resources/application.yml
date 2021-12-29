@@ -1,0 +1,21 @@
+
+server:
+  port: 8080
+
+
+extraEnvHost: 212.64.18.166
+
+
+app:
+  id: shardingJDBC
+apollo:
+  meta: http://${extraEnvHost}:8080
+  bootstrap:
+    namespaces: application,common-mysql
+    enabled: true
+    eagerLoad:
+      enabled: false
+
+
+
+
