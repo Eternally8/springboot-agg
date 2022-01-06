@@ -30,13 +30,13 @@ public class CacheService {
     //目前缓存必须带value
     @Cacheable(value = "test",keyGenerator = "cacheKeyGenerator")
     public UserVoEntity getUserByRedis(int id) {
-        log.info("~~~~~~~~hanlde-DB~~~~~~~~~~~~~~");
+        log.info("~~~~~~~~handle-DB~~~~~~~~~~~~~~");
         return userDao.getUserById(id);
     }
 
     @Cacheable(value = "UserService_getUserByRedisTimeObject#s#100",key = "#p0.id +'::'+#p0.name")
     public UserVoEntity getUserByRedisTimeObject(UserVoEntity vo) {
-        log.info("~~~~~~~~hanlde-DB~~~~~~~~~~~~~~");
+        log.info("~~~~~~~~handle-DB~~~~~~~~~~~~~~");
         return vo;
     }
 
