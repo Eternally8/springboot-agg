@@ -2,7 +2,6 @@ package com.robben.controller;
 
 import cn.hutool.core.io.FileUtil;
 import com.alibaba.excel.EasyExcel;
-import com.alibaba.fastjson.util.IOUtils;
 import com.robben.model.DownloadData;
 import com.robben.utils.reqResult.ResponseEntityDto;
 import com.robben.utils.reqResult.UnifiedReply;
@@ -21,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,13 +41,12 @@ public class FileController extends UnifiedReply {
     private Resource ak;
 
 
-//    @ApiOperation(value = "aaaa")
-//    @GetMapping ("aaaa")
-//    public String hello2() throws Exception {
-//        String areaData =  IOUtils.toString(ak.getInputStream(), String.valueOf(Charset.forName("UTF-8")));
-//        return areaData;
-//    }
-
+    @ApiOperation(value = "上传文件到nginx", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping
+    public ResponseEntityDto<?> uploadFile(@ApiParam(name = "file") @RequestPart("file") MultipartFile file) throws IOException {
+        file.transferTo(new File("/root/uploadFile/" + file.getOriginalFilename()));
+        return buildSuccesResp(file.getSize());
+    }
 
 
     @ApiOperation(value = "上传文件", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
