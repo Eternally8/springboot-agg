@@ -196,7 +196,7 @@
                     <fork>true</fork>
                     <addResources>true</addResources>
                     <!-- 打包配置跳过测试 -->
-                    <skip>true</skip>
+<!--                    <skip>true</skip>-->
                 </configuration>
             </plugin>
             <plugin>
@@ -209,7 +209,6 @@
             </plugin>
         </plugins>
     </build>
-
 
 
     <!--    &lt;!&ndash;使用docker容器自动构建&ndash;&gt;-->
