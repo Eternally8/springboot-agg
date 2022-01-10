@@ -42,18 +42,18 @@ public class FileController extends UnifiedReply {
 
 
     @ApiOperation(value = "上传文件到nginx", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PostMapping
-    public ResponseEntityDto<?> uploadFile(@ApiParam(name = "file") @RequestPart("file") MultipartFile file) throws IOException {
+    @PostMapping("/uploadFile")
+    public ResponseEntityDto<?> uploadFile(@ApiParam @RequestPart MultipartFile file) throws IOException {
         file.transferTo(new File("/root/uploadFile/" + file.getOriginalFilename()));
         return buildSuccesResp(file.getSize());
     }
 
 
     @ApiOperation(value = "上传文件", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PostMapping
-    public ResponseEntityDto<?> createPackage(@ApiParam("文件名") @RequestParam("fileName") String fileName,
-                                              @ApiParam("文件描述") @RequestParam("fileDesc") String fileDesc,
-                                              @ApiParam(name = "file") @RequestPart("file") MultipartFile file) throws IOException {
+    @PostMapping("/createPackage")
+    public ResponseEntityDto<?> createPackage(@ApiParam("文件名") @RequestParam String fileName,
+                                              @ApiParam("文件描述") @RequestParam String fileDesc,
+                                              @ApiParam("文件") @RequestPart MultipartFile file) throws IOException {
         // 处理上传逻辑
         log.info("文件大小为:{}",file.getSize());
 
@@ -71,7 +71,7 @@ public class FileController extends UnifiedReply {
             @ApiImplicitParam(name = "id",value="id",required = true)
     })
     @GetMapping("/downLoadColdData")
-    public ResponseEntity<?> downLoadColdData(String id){
+    public ResponseEntity<?> downLoadColdData(@ApiParam("文件名") @RequestParam String id){
         log.info("下载cvs文件:{}",id);
         String path = "/root/temp/" + id + ".csv";
 
