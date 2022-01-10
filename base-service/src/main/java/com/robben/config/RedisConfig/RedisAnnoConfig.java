@@ -7,6 +7,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCache;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
@@ -40,6 +41,7 @@ public class RedisAnnoConfig {
 
 
     @Bean
+    @Primary
     public RedisCacheManager cacheManager(RedisConnectionFactory rcf){
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
 //                .entryTtl(Duration.ZERO)  //默认没有过期时间

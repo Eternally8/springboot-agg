@@ -4,6 +4,7 @@ import com.robben.config.RedisConfig.RedisMQChannels;
 import com.robben.config.RedisConfig.RedissonConfig;
 import com.robben.model.UserVoEntity;
 import com.robben.service.CacheService;
+import com.robben.service.LocalCacheService;
 import com.robben.utils.Contants;
 import com.robben.utils.RedisUtils;
 import com.robben.utils.reqResult.ResponseEntityDto;
@@ -30,6 +31,8 @@ import java.util.concurrent.*;
 public class RedisController extends UnifiedReply {
     @Autowired
     private CacheService cacheService;
+    @Autowired
+    private LocalCacheService localCacheService;
     @Autowired
     private RedisUtils redisUtils;
     @Autowired
@@ -143,6 +146,14 @@ public class RedisController extends UnifiedReply {
 //            lock.unlock();
 //        }
         return testValue;
+    }
+
+
+
+    @ApiOperation("本地缓存")
+    @GetMapping(value = "/localCache")
+    public ResponseEntityDto<Boolean> localCache(@RequestParam String s){
+        return buildSuccesResp(localCacheService.getCacheValue(s));
     }
 
 

@@ -19,7 +19,8 @@ public class FileterConfiguration {
         FilterRegistrationBean<LogCostFilter> bean = new FilterRegistrationBean<LogCostFilter>();
         bean.setFilter(new LogCostFilter());//注册自定义过滤器
         bean.setName("flilter1");//过滤器名称
-        bean.addUrlPatterns("/*");//过滤所有路径
+        bean.addUrlPatterns("/anno/*");//过滤注解的请求
+//        bean.addUrlPatterns("/*");//过滤所有路径
         bean.setOrder(1);//优先级，最顶级
         return bean;
     }
