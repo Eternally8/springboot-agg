@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Api(tags = "文件处理")
-@Controller
+@RestController
 @RequestMapping("/file")
 public class FileController extends UnifiedReply {
 
@@ -43,13 +43,10 @@ public class FileController extends UnifiedReply {
 
     @ApiOperation(value = "上传文件到nginx", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PostMapping("/uploadFile")
-    public ResponseEntityDto<?> uploadFile(@ApiParam(name = "file") @RequestPart(name = "file") MultipartFile file) {
-        try {
-            file.transferTo(new File("/root/downFile/" + file.getName()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return buildSuccesResp(file.getSize());
+    public ResponseEntityDto<?> uploadFile(@ApiParam @RequestPart MultipartFile file) throws IOException {
+        log.info("上传文件名字:{}",file.getOriginalFilename());
+        file.transferTo(new File("/root/downFile/" + file.getOriginalFilename()));
+        return buildSuccesResp();
     }
 
 
