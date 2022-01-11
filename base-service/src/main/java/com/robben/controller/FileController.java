@@ -13,7 +13,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,8 +41,8 @@ public class FileController extends UnifiedReply {
 
 
     @ApiOperation(value = "上传文件到nginx", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PostMapping("/uploadFile")
-    public ResponseEntityDto<?> uploadFile(@ApiParam @RequestPart MultipartFile file) throws IOException {
+    @PostMapping("/uploadFileToNginx")
+    public ResponseEntityDto<?> uploadFileToNginx(@ApiParam @RequestPart MultipartFile file) throws IOException {
         log.info("上传文件名字:{}",file.getOriginalFilename());
         file.transferTo(new File("/root/downFile/" + file.getOriginalFilename()));
         return buildSuccesResp();
@@ -51,8 +50,8 @@ public class FileController extends UnifiedReply {
 
 
     @ApiOperation(value = "上传文件", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PostMapping("/createPackage")
-    public ResponseEntityDto<?> createPackage(@ApiParam("文件名") @RequestParam String fileName,
+    @PostMapping("/uploadFile")
+    public ResponseEntityDto<?> uploadFile(@ApiParam("文件名") @RequestParam String fileName,
                                               @ApiParam("文件描述") @RequestParam String fileDesc,
                                               @ApiParam("文件") @RequestPart MultipartFile file) throws IOException {
         // 处理上传逻辑
@@ -68,9 +67,6 @@ public class FileController extends UnifiedReply {
 
 
     @ApiOperation(value = "下载cvs文件",notes = "根据id下载")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id",value="id",required = true)
-    })
     @GetMapping("/downLoadColdData")
     public ResponseEntity<?> downLoadColdData(@ApiParam("文件名") @RequestParam String id){
         log.info("下载cvs文件:{}",id);
@@ -129,10 +125,9 @@ public class FileController extends UnifiedReply {
     }
 
 
-    @ApiOperation("自定义目录文件上传保存")
+    @ApiOperation(value = "自定义目录文件上传保存",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PostMapping("uploadSelf")
-    public ResponseEntityDto<?> uploadSelf(@RequestPart("file") MultipartFile file,
-                                           @RequestParam("filePath") String filePath) {
+    public ResponseEntityDto<?> uploadSelf(@RequestPart MultipartFile file,@RequestParam String filePath) {
         if (!FileUtil.isDirectory(filePath)) {
             FileUtil.mkdir(filePath);
         }
@@ -149,7 +144,7 @@ public class FileController extends UnifiedReply {
 
     @ApiOperation("获取自定义路径下文件列表")
     @GetMapping("/catalogFiles")
-    public ResponseEntityDto<?> catalogFiles(@ApiParam("filePath") @RequestParam("filePath") String filePath) {
+    public ResponseEntityDto<?> catalogFiles(@RequestParam String filePath) {
         // 获取压缩包中所有模块的信息
         List<String> moduleNames = Arrays.stream(FileUtil.ls(filePath))
                 .filter(File::isFile).map(File::getName).collect(Collectors.toList());
@@ -159,7 +154,7 @@ public class FileController extends UnifiedReply {
 
     @ApiOperation("自定义下载文件")
     @GetMapping("/downSelf")
-    public ResponseEntity<?> downSelf(@ApiParam("filePath") @RequestParam("filePath") String filePath) {
+    public ResponseEntity<?> downSelf(@RequestParam String filePath) {
         //根据路径 api返回文件
         HttpHeaders headers = new HttpHeaders();
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");

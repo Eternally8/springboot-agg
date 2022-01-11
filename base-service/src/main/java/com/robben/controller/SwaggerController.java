@@ -1,6 +1,7 @@
 package com.robben.controller;
 
 import com.robben.model.ParamVaildReqVo;
+import com.robben.model.req.UploadFil2Req;
 import com.robben.utils.reqResult.ResponseEntityDto;
 import com.robben.utils.reqResult.UnifiedReply;
 import io.swagger.annotations.*;
@@ -9,28 +10,16 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Api(tags = "swagger示例区")
 @RestController
 @RequestMapping("/swg")
 public class SwaggerController extends UnifiedReply {
-    /**
-     * 无需校验,不加注解
-     */
-    @ApiOperation(value = "hello")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name="id", value="用户ID", required=true),
-            @ApiImplicitParam(name="name", value="名字", required=true, paramType="query", dataType="String", defaultValue="1"),
-            @ApiImplicitParam(name="age", value="年龄", required=true)
-    })
-    //    @GetMapping ("hello")
-    @PostMapping("hello")
-    public String hello(Integer id, String name, Integer age) {
-        log.info("hello方法执行_id:{},name:{},age:{}",id,name,age);
-        return id + "#" + name + "#" + age;
-    }
-
-
     /**
      * name 指定参数名
      * value 指定参数的文档名 可以直接只写value文档名,参数的名称默认会自动填写
@@ -61,6 +50,13 @@ public class SwaggerController extends UnifiedReply {
         // 处理上传逻辑
         log.info("文件大小为:{}",file.getSize());
         return buildSuccesResp(file.getSize());
+    }
+
+
+    @ApiOperation(value = "hello5", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping("/hello5")
+    public ResponseEntityDto<?> hello5(UploadFil2Req req){
+        return buildSuccesResp();
     }
 
 }
