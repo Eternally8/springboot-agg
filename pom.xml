@@ -53,7 +53,7 @@
     </dependencyManagement>
 
     <properties>
-        <knife4j-v>3.0.2</knife4j-v>
+        <knife4j-v>3.0.3</knife4j-v>
         <lombok-v>1.18.10</lombok-v>
         <fastjson-v>1.2.58</fastjson-v>
         <guava-v>30.0-jre</guava-v>
