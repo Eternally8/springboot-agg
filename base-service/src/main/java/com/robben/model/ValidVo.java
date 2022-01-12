@@ -58,8 +58,8 @@ public class ValidVo {
     private String type;
 
 
-    @Null(groups = ValidGroup.Crud.Create.class, message = "应用IC必须为空")
-    @NotNull(groups = ValidGroup.Crud.Update.class, message = "应用ID不能为空")
+    @Null(groups = ValidGroup.noParam.class, message = "param必须为空")
+    @NotNull(groups = ValidGroup.mustParam.class, message = "param不能为空")
     @ApiModelProperty(value = "类型")
     private String param;
 

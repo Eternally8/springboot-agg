@@ -61,7 +61,7 @@ public class VaildParamController {
 
     @ApiOperation("RequestBody校验-分组")
     @PostMapping("/valid/test4")
-    public String test4(@Validated(ValidGroup.Crud.Create.class) @RequestBody ValidVo validVO){
+    public String test4(@Validated(ValidGroup.mustParam.class) @RequestBody ValidVo validVO){
         return "success";
     }
 
