@@ -56,9 +56,9 @@ public class ValidVo {
     @ApiModelProperty(value = "类型")
     private String type;
 
-    //分组有个弊端,其他的不能校验,所以其分组必须继承默认的分组
+    //分组有个弊端,其他的不能校验,所以其分组必须继承默认的分组,才能保持实现功能
     @Null(groups = ValidGroup.noParam.class, message = "param必须为空")
-//    @NotNull(groups = ValidGroup.class, message = "param不能为空")
+    @NotNull(groups = ValidGroup.param.class, message = "param不能为空")
     @ApiModelProperty(value = "类型")
     private String param;
 
