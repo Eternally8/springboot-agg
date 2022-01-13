@@ -8,6 +8,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.*;
+import java.util.List;
 
 
 /**
@@ -48,8 +49,6 @@ public class ValidVo {
     @Email(message = "请填写正确的邮箱地址")
     private String email;
 
-    private String sex;
-
     @NotEmpty(message = "级别不能为空")
     private String level;
 
@@ -57,11 +56,14 @@ public class ValidVo {
     @ApiModelProperty(value = "类型")
     private String type;
 
-
+    //分组有个弊端,其他的不能校验,所以其分组必须继承默认的分组
     @Null(groups = ValidGroup.noParam.class, message = "param必须为空")
-    @NotNull(groups = ValidGroup.mustParam.class, message = "param不能为空")
+//    @NotNull(groups = ValidGroup.class, message = "param不能为空")
     @ApiModelProperty(value = "类型")
     private String param;
+
+    @NotEmpty(message = "list不能为空")
+    private List<String> list;
 
 }
 

@@ -1,7 +1,9 @@
 package com.robben.annotation.validParam;
 
-public interface ValidGroup {
+import javax.validation.groups.Default;
 
-    interface noParam{}
-    interface mustParam{}
+public interface ValidGroup extends Default {
+
+    interface noParam {};
+
 }
