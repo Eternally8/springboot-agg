@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
 
@@ -64,6 +65,12 @@ public class ValidVo {
 
     @NotEmpty(message = "list不能为空")
     private List<String> list;
+
+    //若需要校验嵌套的对象中的属性,则需要加上@Valid
+    @Valid
+    @NotEmpty(message = "list不能为空")
+    private UserVoEntity userVoEntity;
+
 
 }
 
