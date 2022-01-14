@@ -25,20 +25,21 @@ public class SuserShardingMonthController {
     private SuserShardingMonthMapper suserShardingMonthMapper;
 
 
-    @ApiOperation("分表存储用户")
+
+    @ApiOperation("分库分表存储用户")
     @GetMapping("/user/save")
     public String save() {
-        for (int i = 0; i <2 ; i++) {
+        for (long i = 0; i <2; i++) {
             SuserShardingMonthEntity user = new SuserShardingMonthEntity();
             user.setName("test"+i);
-            user.setShardingIndex(123l + i);
+            user.setShardingIndex(i);
             suserShardingMonthMapper.insert(user);
         }
         return "success";
     }
 
 
-    @ApiOperation("分表获取用户")
+    @ApiOperation("分库分表获取用户")
     @GetMapping("/user/get")
     public SuserShardingMonthEntity get(@RequestParam Long id) {
         return suserShardingMonthMapper.selectById(id);

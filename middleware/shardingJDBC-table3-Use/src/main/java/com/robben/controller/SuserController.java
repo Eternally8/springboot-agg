@@ -28,7 +28,7 @@ public class SuserController {
     @ApiOperation("存储用户")
     @GetMapping("/user/save")
     public String save() {
-        for (int i = 0; i <2 ; i++) {
+        for (int i = 0; i <10; i++) {
             SuserEntity user=new SuserEntity();
             user.setName("test"+i);
             userMapper.insert(user);
