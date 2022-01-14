@@ -1,5 +1,6 @@
 package com.robben.controller;
 
+import com.robben.model.DescInfoListVo;
 import com.robben.model.DescInfoVo;
 import com.robben.model.UserMbplusInfoEntity;
 import com.robben.service.MybatisPlusService;
@@ -31,6 +32,7 @@ public class MybatisPlusController extends UnifiedReply {
     public ResponseEntityDto insertUser(){
         UserMbplusInfoEntity vo = new UserMbplusInfoEntity();
         vo.setAge(1);
+        vo.setName("lalalalal");
         vo.setCreateTime(new Date());
         vo.setSex(false);
         vo.setUpdateTime(new Date());
@@ -43,10 +45,15 @@ public class MybatisPlusController extends UnifiedReply {
         dv.setPhone(Arrays.asList("123","456"));
         vo.setDescInfo(dv);
 
-        //赋值一个json集合
+        //赋值一个json集合对象
         List<DescInfoVo> ld = new ArrayList<>();
         ld.add(dv);
-        vo.setDescInfoArrary(ld);
+        vo.setDescInfoList(ld);
+
+        //赋值一个对象,对象中有list
+        DescInfoListVo descInfoListVo = new DescInfoListVo();
+        descInfoListVo.setDlist(ld);
+        vo.setDescInfoListVo(descInfoListVo);
 
         mybatisPlusService.insertUser(vo);
         return buildSuccesResp(vo);
@@ -64,6 +71,14 @@ public class MybatisPlusController extends UnifiedReply {
     @ApiOperation(value = "根据用户名查信息")
     @GetMapping("/getUserByName")
     public ResponseEntityDto getUserByName(@ApiParam String name){
+        List<UserMbplusInfoEntity> list = mybatisPlusService.getUserByName(name);
+        for (UserMbplusInfoEntity u : list) {
+            System.out.println(u.getName());
+            System.out.println(u.getDescInfo().getAge());
+            System.out.println(u.getDescInfoList().get(0).getPhone());
+            System.out.println(u.getDescInfoListVo().getDlist().get(0).getPhone());
+        }
+
         return buildSuccesResp(mybatisPlusService.getUserByName(name));
     }
 
