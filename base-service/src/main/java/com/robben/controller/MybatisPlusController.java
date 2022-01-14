@@ -53,7 +53,7 @@ public class MybatisPlusController extends UnifiedReply {
     }
 
 
-    @ApiOperation(value = "更新用户信息",notes = "更新用户信息")
+    @ApiOperation(value = "更新用户信息",notes = "更新用户信息,增加了时间字段的转换、JSON格式数据的使用")
     @PostMapping("/updateUser")
     public ResponseEntityDto updateUser(@RequestBody UserMbplusInfoEntity vo){
         UserMbplusInfoEntity result = mybatisPlusService.updateUser(vo);
@@ -63,7 +63,7 @@ public class MybatisPlusController extends UnifiedReply {
 
     @ApiOperation(value = "根据用户名查信息")
     @GetMapping("/getUserByName")
-    public ResponseEntityDto getUserByName(@ApiParam(value = "name") String name){
+    public ResponseEntityDto getUserByName(@ApiParam String name){
         return buildSuccesResp(mybatisPlusService.getUserByName(name));
     }
 

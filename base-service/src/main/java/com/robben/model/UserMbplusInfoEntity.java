@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-@TableName("user_mbplus_info")
+@TableName(value = "user_mbplus_info",autoResultMap = true)
 public class UserMbplusInfoEntity {
 
     //默认不是自增,需要增加这个。也可以增加全局配置（mybatis-plus.global-config.db-config.id-type = AUTO）
@@ -29,6 +29,7 @@ public class UserMbplusInfoEntity {
      *  推荐使用MySQL 8.0.17版本
      *  更多的sql语法细节可参考 https://dev.mysql.com/doc/refman/8.0/en/json.html
      *  JSON 数据类型推荐使用在不经常更新的静态数据存储
+     *  注意:@TableName中的autoResultMap == true
      */
     @TableField(typeHandler = FastjsonTypeHandler.class)
     private DescInfoVo descInfo;
