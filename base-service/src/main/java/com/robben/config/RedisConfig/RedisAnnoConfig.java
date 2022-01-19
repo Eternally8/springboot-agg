@@ -44,7 +44,7 @@ public class RedisAnnoConfig {
     @Primary
     public RedisCacheManager cacheManager(RedisConnectionFactory rcf){
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-//                .entryTtl(Duration.ZERO)  //默认没有过期时间
+//                .entryTtl(Duration.ZERO)  //默认没有过期时间2
                 .entryTtl(Duration.ofMinutes(10))  //设置默认过期时间为10min
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(valueSerializer()))
