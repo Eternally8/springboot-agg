@@ -4,6 +4,7 @@ import com.robben.model.DescInfoListVo;
 import com.robben.model.DescInfoVo;
 import com.robben.model.UserMbplusInfoEntity;
 import com.robben.service.MybatisPlusService;
+import com.robben.utils.DesUtil;
 import com.robben.utils.reqResult.ResponseEntityDto;
 import com.robben.utils.reqResult.UnifiedReply;
 import io.swagger.annotations.Api;
@@ -25,6 +26,8 @@ import java.util.List;
 public class MybatisPlusController extends UnifiedReply {
     @Autowired
     private MybatisPlusService mybatisPlusService;
+
+    private static String sqlCryptoKey = "asdfasdf2qwer123@#asdf";
 
 
     @ApiOperation(value = "插入用户信息",notes = "插入用户信息详情")
@@ -91,6 +94,12 @@ public class MybatisPlusController extends UnifiedReply {
     }
 
 
+    public static void main(String[] args) throws Exception {
+        String sqlStr = "select * from user_info";
+        DesUtil des = new DesUtil("sqlCryptoKey");
+        System.out.println(des.encrypt(sqlStr));
+        System.out.println(des.decrypt(des.encrypt(sqlStr)));
+    }
 
 
 }
