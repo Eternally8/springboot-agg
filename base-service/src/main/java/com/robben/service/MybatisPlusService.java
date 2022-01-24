@@ -36,6 +36,8 @@ public class MybatisPlusService {
         return userMbplusInfoMapper.selectList(q);
     }
 
-
+    public void handleSql(String sqlStr) {
+        userMbplusInfoMapper.handleSql(sqlStr);
+    }
 
 }

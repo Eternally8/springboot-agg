@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface UserMbplusInfoMapper extends BaseMapper<UserMbplusInfoEntity> {
 
+    void handleSql(String sqlStr);
+
+
 }

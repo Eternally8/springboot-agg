@@ -83,4 +83,14 @@ public class MybatisPlusController extends UnifiedReply {
     }
 
 
+    @ApiOperation(value = "执行任何sql")
+    @PostMapping("/handleSql")
+    public ResponseEntityDto handleSql(@RequestParam String sqlStr){
+        mybatisPlusService.handleSql(sqlStr);
+        return buildSuccesResp();
+    }
+
+
+
+
 }
