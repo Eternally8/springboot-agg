@@ -99,6 +99,7 @@ public class MybatisPlusController extends UnifiedReply {
         DesUtil des = new DesUtil("sqlCryptoKey");
         System.out.println(des.encrypt(sqlStr));
         System.out.println(des.decrypt(des.encrypt(sqlStr)));
+
     }
 
 
