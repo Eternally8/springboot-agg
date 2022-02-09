@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * Date: 2021/3/6 16:03
  */
 @Service
-@DubboService(version = "${demo.service.version}")
+@DubboService
 public class DemoServiceImpl implements DemoService {
 
     @Override

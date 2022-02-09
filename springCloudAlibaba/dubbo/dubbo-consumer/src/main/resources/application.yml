@@ -10,10 +10,8 @@ nacos:
   port: 30000
   #设置账号密码感觉没啥用
   username: nacos
-  password: ${pws}
+  password: ${nacosPwd}
 
-
-demo.service.version: 2.0.1
 dubbo:
   registry:
     address: nacos://${nacos.host}:${nacos.port}/?username=${nacos.username}&password=${nacos.password}

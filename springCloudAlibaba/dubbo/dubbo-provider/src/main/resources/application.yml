@@ -10,17 +10,16 @@ nacos:
   server-address: 212.64.18.166
   port: 30000
   username: nacos
-  password: ${adfasdf}
+  password: ${nacosPwd}
 
 
-demo.service.version: 2.0.1
+
 dubbo:
   application:
     name: ${spring.application.name}
   scan:
     base-packages: com.robben.service
   protocol:
-    name: dubbo
     port: -1
   registry:
     address: nacos://${nacos.server-address}:${nacos.port}/?username=${nacos.username}&password=${nacos.password}

@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class DubboConsumerApplication {
 
-    @DubboReference(version = "${demo.service.version}")
+    @DubboReference
     private DemoService demoService;
 
 
