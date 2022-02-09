@@ -1,4 +1,4 @@
-package com.robben.model;
+package com.robben.nacos.dc.model;
 
 import lombok.Data;
 

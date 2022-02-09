@@ -13,9 +13,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>nacos-provider</module>
+        <module>nacos-discovery-config</module>
         <module>nacos-provider2</module>
-        <module>nacos-consumer</module>
         <module>nacos-gateway</module>
         <module>dubbo</module>
         <module>seateDemo</module>

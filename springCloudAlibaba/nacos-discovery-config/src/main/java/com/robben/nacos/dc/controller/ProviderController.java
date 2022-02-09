@@ -1,7 +1,6 @@
-package com.robben.controller;
+package com.robben.nacos.dc.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.robben.model.StudentVo;
+import com.robben.nacos.dc.model.StudentVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -14,15 +13,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/nprovider")
 public class ProviderController {
 
-    @Value("${server.port}")
-    private String serverPort;
+    @Value("${testValue:123}")
+    private String testValue;
+
+
+    @ApiOperation(value = "获取配置项的值")
+    @PostMapping(value = "/getConfigValue")
+    public String getConfigValue() {
+        return testValue;
+    }
 
     @ApiOperation(value = "提供对外服务", notes = "测试提供对外服务")
     @PostMapping(value = "/myHandle")
     public StudentVo myHandle(@RequestBody StudentVo studentVo) {
-        log.info("np获取了参数:{}", JSON.toJSONString(studentVo));
-
-        studentVo.setName("provider:" + serverPort);
+        studentVo.setName("provider:" + testValue);
         studentVo.setAge(studentVo.getAge() + 1);
         return studentVo;
     }
