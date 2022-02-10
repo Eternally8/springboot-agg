@@ -1,7 +1,7 @@
 import java.util.HashMap;
 
 /**
- * Description： 无重复字符的最长子串
+ * Description： 无重复字符的最长子串个数
  * Author: robben
  * Date: 2021/10/6 11:37
  */
