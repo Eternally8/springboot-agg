@@ -7,7 +7,7 @@ nacosServerHost: 212.64.18.166
 
 spring:
   application:
-    name: nacos-discovery-config
+    name: example
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher

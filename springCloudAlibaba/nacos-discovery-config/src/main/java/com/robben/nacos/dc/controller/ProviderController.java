@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RefreshScope
 public class ProviderController {
 
-    @Value("${testValue}")
+    @Value("${aaaa}")
     private String testValue;
 
 
