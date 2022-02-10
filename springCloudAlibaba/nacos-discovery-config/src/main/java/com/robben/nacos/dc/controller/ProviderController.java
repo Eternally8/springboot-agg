@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "nacosProvider提供接口")
 @RestController
 @RequestMapping("/nprovider")
+@RefreshScope
 public class ProviderController {
 
     @Value("${testValue}")
