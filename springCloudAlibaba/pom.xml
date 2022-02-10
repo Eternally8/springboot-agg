@@ -18,6 +18,7 @@
         <module>nacos-gateway</module>
         <module>dubbo</module>
         <module>seateDemo</module>
+        <module>sentinelDemo</module>
     </modules>
 
     <properties>

@@ -4,26 +4,20 @@
 server:
   port: 28083
 
-nacosServerHost: 212.64.18.166
+serverHost: 212.64.18.166
 
 
 spring:
   application:
-    name: example
-  #spring在2.6后需要加入
+    name: sentinelDemo
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
   cloud:
-    nacos:
-      config:
-        server-addr: ${nacosServerHost}:30000
-      discovery:
-        server-addr: ${nacosServerHost}:30000
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: ${serverHost}:8080
 
 
-
-logging:
-  level:
-    com.robben: debug
 
