@@ -9,7 +9,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@Api(tags = "nacosProvider提供接口")
+@Api(tags = "对外接口")
 @RestController
 @RequestMapping("/nprovider")
 @RefreshScope
