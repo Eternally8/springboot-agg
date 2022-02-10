@@ -15,24 +15,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sentinelController")
 public class SentinelController {
 
-
-    @ApiOperation(value = "测试限流")
-    @SentinelResource(value = "hello", blockHandler = "exceptionHandler", fallback = "helloFallback")
-    @PostMapping(value = "/test")
-    public String test() {
-        return "testValue";
+    //测速控制台的话,需要放到服务上的才能测试看的
+    @ApiOperation(value = "静态配置-测试限流")
+    @SentinelResource(value = "getAppValue", blockHandler = "exceptionBlockHandler", fallback = "exceptionFallbackHandler")
+    @PostMapping(value = "/getAppValue")
+    public String getAppValue() {
+        return "getAppValueValue";
     }
 
+
+    //动态配置规则
+    @ApiOperation(value = "动态配置规则-测试限流")
+    @SentinelResource(value = "getAppValue2", blockHandler = "exceptionBlockHandler", fallback = "exceptionFallbackHandler")
+    @PostMapping(value = "/getAppValue2")
+    public String getAppValue2() {
+        return "getAppValueValue2";
+    }
+
+
     // Fallback 函数，函数签名与原函数一致或加一个 Throwable 类型的参数.
-    public String helloFallback(long s) {
-        return String.format("Halooooo %d", s);
+    public String exceptionFallbackHandler() {
+        return "helloFallback~~~~~~~~~~~~";
     }
 
     // Block 异常处理函数，参数最后多一个 BlockException，其余与原函数一致.
-    public String exceptionHandler(long s, BlockException ex) {
+    public String exceptionBlockHandler(BlockException ex) {
         // Do some log here.
         ex.printStackTrace();
-        return "Oops, error occurred at " + s;
+        return "exceptionHandler~~~~~~~~~";
     }
 
 
