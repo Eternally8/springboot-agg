@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 public class StrMultiply {
 
     public static void main(String[] args) {
-        System.out.println(multiply("99","99"));
+        System.out.println(multiply("9","99"));
     }
 
     public static String multiply(String num1, String num2) {
