@@ -1,4 +1,4 @@
 spring:
-  profiles:
-    active: yun
-
+  config:
+    activate:
+      on-profile: yun
