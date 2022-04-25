@@ -1,5 +1,3 @@
-package com.robben.aproblem;
-
 import cn.hutool.core.util.RandomUtil;
 
 /**

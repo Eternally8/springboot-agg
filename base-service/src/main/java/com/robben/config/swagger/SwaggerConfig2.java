@@ -1,4 +1,4 @@
-package com.robben.config;
+package com.robben.config.swagger;
 
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import io.swagger.annotations.ApiOperation;

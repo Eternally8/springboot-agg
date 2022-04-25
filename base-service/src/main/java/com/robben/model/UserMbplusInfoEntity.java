@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.robben.model.jsonChage.DescInfoVoListTypeHandler;
+import com.robben.model.jsonChange.DescInfoVoListTypeHandler;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,6 +26,7 @@ public class UserMbplusInfoEntity {
     private String workInfo;
 
     /**
+     * mysql存储json格式字段---对应实体类关系
      *  这个功能是MySQL5.7.8后增加的,在MySQL8.0中得到了大幅增强 https://blog.csdn.net/qq_38688267/article/details/107386138
      *  推荐使用MySQL 8.0.17版本
      *  更多的sql语法细节可参考 https://dev.mysql.com/doc/refman/8.0/en/json.html

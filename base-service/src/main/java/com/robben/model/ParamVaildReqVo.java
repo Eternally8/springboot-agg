@@ -2,7 +2,7 @@ package com.robben.model;
 
 import com.robben.annotation.validParam.EnumValidAnnotation;
 import com.robben.annotation.ProductTypeEnum;
-import com.robben.constant.ParamVaildAdd;
+import com.robben.model.valid.ParamValidAdd;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -31,7 +31,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class ParamVaildReqVo {
-    @NotNull(message = "年龄不能为空",groups = ParamVaildAdd.class)
+    @NotNull(message = "年龄不能为空",groups = ParamValidAdd.class)
     @ApiModelProperty(value = "年龄")
     private Integer age;
 

@@ -16,9 +16,6 @@
         <module>customStarter</module>
         <module>zsf</module>
         <module>base-service</module>
-        <module>middleware/shardingJDBC-table2-Use</module>
-        <module>middleware/redisExtend</module>
-        <module>middleware/shardingJDBC-table3-Use</module>
     </modules>
 
     <!--SpringBoot的父依赖启动 -->

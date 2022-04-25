@@ -8,6 +8,7 @@
         <groupId>com.robben</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>middleware</artifactId>
@@ -19,9 +20,11 @@
         <module>esUse</module>
         <module>kafkaUse</module>
         <module>mongoDBUse</module>
+        <module>redisExtend</module>
         <module>rocketMqUse</module>
         <module>shardingJDBC-table-Use</module>
         <module>shardingJDBC-table2-Use</module>
+        <module>shardingJDBC-table3-Use</module>
     </modules>
 
     <properties>

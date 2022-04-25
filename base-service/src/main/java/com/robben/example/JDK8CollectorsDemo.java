@@ -1,6 +1,8 @@
 package com.robben.example;
 
+import com.google.common.base.Joiner;
 import com.robben.model.StudentVo;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -61,7 +63,18 @@ public class JDK8CollectorsDemo {
         //先以属性一降序,再进行属性二升序
         list.stream().sorted(Comparator.comparing(StudentVo::getAge,Comparator.reverseOrder()).thenComparing(StudentVo::getId));
 
-
     }
+
+
+    //排序map中的key,并且是的key和value使用&=链接
+    private static String paramMapSortByKey(Map<String, String> map) {
+        TreeMap<String, String> treeMap = map.entrySet().stream()
+                .collect(Collectors.toMap(entry-> StringUtils.lowerCase(entry.getKey()), entry->
+                        StringUtils.lowerCase(entry.getValue()), (v1, v2) -> v2, TreeMap::new));
+        //对 map 中排序后，按 key1=value1&key2=value2 进行字符串拼接
+        String mapSortToString = Joiner.on("&").withKeyValueSeparator("=").join(treeMap);
+        return mapSortToString;
+    }
+
 
 }

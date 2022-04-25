@@ -1,4 +1,4 @@
-package com.robben.model.jsonChage;
+package com.robben.model.jsonChange;
 
 import com.alibaba.fastjson.TypeReference;
 import com.robben.model.DescInfoVo;

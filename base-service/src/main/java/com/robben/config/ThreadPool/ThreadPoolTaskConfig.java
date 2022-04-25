@@ -1,4 +1,4 @@
-package com.robben.config;
+package com.robben.config.ThreadPool;
 
 import com.robben.utils.Contants;
 import org.springframework.context.annotation.Bean;
