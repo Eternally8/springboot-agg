@@ -1,1 +1,2 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\com.robben.starter.HelloServiceAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.robben.starter.HelloServiceAutoConfiguration

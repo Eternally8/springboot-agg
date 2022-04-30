@@ -135,6 +135,13 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>robben2</groupId>
+            <artifactId>customStarter</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+
     </dependencies>
 
 

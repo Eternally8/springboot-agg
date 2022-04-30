@@ -55,6 +55,9 @@ mybatis:
     #自动转驼峰
     mapUnderscoreToCamelCase: true
 
+link:
+  name: adasdf
+  msg: asdfasd22222
 
 logging:
   level:

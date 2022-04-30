@@ -1,10 +1,8 @@
 package com.robben.controller;
 
+import com.robben.starter.HelloService;
 import com.robben.utils.OtherUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-@Api(tags = "对外接口")
+@Api(tags = "bean的api")
 @RestController
 @RequestMapping("/outapi")
 public class BeanController {
@@ -26,6 +24,16 @@ public class BeanController {
     private ApplicationContext applicationContext;
     @Autowired
     private OtherUtils otherUtils;
+    @Autowired
+    private HelloService helloService;
+
+
+    @ApiOperation(value = "测试自定义的start")
+    @PostMapping("startTest")
+    public String startTest(@ApiParam(name = "name",value = "value") String msg) {
+        helloService.say();
+        return "success";
+    }
 
 
     @ApiOperation(value = "测试修改注入bean的字段值")
