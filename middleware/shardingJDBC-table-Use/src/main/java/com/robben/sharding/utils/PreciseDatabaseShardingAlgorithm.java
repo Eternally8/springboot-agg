@@ -28,7 +28,9 @@ public class PreciseDatabaseShardingAlgorithm implements PreciseShardingAlgorith
         // 库后缀
         String yearStr = SDateUtil.getYearByMillisecond(value);
 
-        if (value <= 0) throw new UnsupportedOperationException("preciseShardingValue is null");
+        if (value <= 0) {
+            throw new UnsupportedOperationException("preciseShardingValue is null");
+        }
 
         for (String availableTargetName : availableTargetNames) {
             if (availableTargetName.endsWith(yearStr)) {
