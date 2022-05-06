@@ -1,3 +1,6 @@
+##导入宏定义
+$!define
+
 ##设置表后缀（宏定义）
 #setTableSuffix("Dao")
 
@@ -7,12 +10,16 @@
 ##包路径（宏定义）
 #setPackageSuffix("dao")
 
-import org.apache.ibatis.annotations.Mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import $!{tableInfo.savePackageName}.entity.$!{tableInfo.name}Entity;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+import $!{tableInfo.savePackageName}.entity.$!tableInfo.name;
 
+##表注释（宏定义）
+#tableComment("表数据库访问层")
 
+@Repository
 @Mapper
-public interface $!{tableName} extends BaseMapper<$!{tableInfo.name}Entity> {
+public interface $!{tableName} extends BaseMapper<$!tableInfo.name> {
 
 }

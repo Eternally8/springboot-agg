@@ -1,51 +1,27 @@
-##引入宏定义
+##导入宏定义
 $!define
 
-###set($tableName = $tool.append($tableInfo.name, "Entity"))
+##保存文件（宏定义）
+#save("/entity", ".java")
 
-$!callback.setFileName($tool.append($tool.append($tableInfo.name, "Entity"), ".java"))
-$!callback.setSavePath($tool.append($tableInfo.savePath, "/entity"))
-
-##使用宏定义设置回调（保存位置与文件后缀）
-###save("/entity", "Entity.java")
-##使用宏定义设置包后缀
+##包路径（宏定义）
 #setPackageSuffix("entity")
 
-##使用全局变量实现默认包导入
+##自动导入包（全局变量）
 $!autoImport
-import lombok.Data;
-#foreach($column in $tableInfo.fullColumn)
-    #if($column.type.equals("java.util.Date"))
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 import com.baomidou.mybatisplus.annotation.TableName;
-#break
-    #end
-#end
-/**
- * ($!{tableInfo.obj.name})实体类
- *
- * @author hjz
- * @since $!time.currTime()
- */
+import lombok.Data;
+import java.io.Serializable;
+
+##表注释（宏定义）
+#tableComment("表实体类")
+@SuppressWarnings("serial")
 @Data
 @TableName("$!{tableInfo.obj.name}")
-public class $!{tableInfo.name}Entity {
-
+public class $!{tableInfo.name}  implements Serializable{
 #foreach($column in $tableInfo.fullColumn)
-    #if(${column.comment})/**
-    * ${column.comment}
-    */#end
-#if($column.type.equals("java.util.Date") || $column.type.equals("java.sql.Timestamp"))
+    #if(${column.comment})//${column.comment}#end
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date $!{column.name};
-#else
-private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
+    private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
 #end
-
-#end
-
 }
