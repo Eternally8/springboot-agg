@@ -27,6 +27,11 @@ public class HelloServiceAutoConfiguration {
         helloService.setName(helloProperties.getName());
         helloService.setMsg(helloProperties.getMsg());
         System.out.println("创建了HelloService");
+
+        if(helloProperties.getName() == null || helloProperties.getMsg() == null){
+            return null;
+        }
+
         return helloService;
     }
 

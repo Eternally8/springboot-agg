@@ -8,6 +8,7 @@ import com.robben.utils.reqResult.UnifiedReply;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -171,6 +172,13 @@ public class FileController extends UnifiedReply {
                 .body(resource);
     }
 
+
+    @ApiOperation("获取配置文件信息")
+    @GetMapping("/getResourcesFile")
+    public String downSelf() {
+        Resource resource = new ClassPathResource("static/aaa.txt");
+        return resource.getFilename();
+    }
 
     private List<String> data() {
         List<String> list = new ArrayList<String>();

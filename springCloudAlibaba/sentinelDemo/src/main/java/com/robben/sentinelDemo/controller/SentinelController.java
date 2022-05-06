@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@Api(tags = "对外接口")
+@Api(tags = "sentinel的api")
 @RestController
 @RequestMapping("/sentinelController")
 public class SentinelController {
