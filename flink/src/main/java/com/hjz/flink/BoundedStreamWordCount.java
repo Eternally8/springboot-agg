@@ -8,10 +8,6 @@ import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
 
-import java.io.File;
-import java.io.InputStream;
-import java.util.Properties;
-
 /**
  * 有界流处理
  */
