@@ -1,6 +1,8 @@
 package com.robben.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.robben.annotation.validParam.self.CommonErrorCodeEnum;
+import com.robben.annotation.validParam.self.NotNull;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,6 +14,7 @@ import java.util.Date;
 public class UserVoEntity implements Serializable {
 
     @ApiModelProperty(value = "主键的ID")
+    @NotNull(codeEnum = CommonErrorCodeEnum.P_Common_ParamMissing)
     private Integer id;
 
     @ApiModelProperty(value = "名字")
