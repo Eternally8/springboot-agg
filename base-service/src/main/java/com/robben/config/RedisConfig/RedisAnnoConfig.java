@@ -14,6 +14,7 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -35,10 +36,34 @@ import java.time.Duration;
 @Slf4j
 @Configuration
 @EnableCaching
-//发现不继承CachingConfigurerSupport也可以
-//public class RedisAnnoConfig  extends CachingConfigurerSupport{
 public class RedisAnnoConfig {
 
+    /**
+     * 如果不配置spring.redis.*的话,可以直接覆写redistemplate,创建新的连接工厂
+     * @param rcf
+     * @return
+     */
+//    @PostConstruct
+//    public void initHanle(){
+//        RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
+//        configuration.setHostName(hostName);
+//        configuration.setPort(port);
+//        configuration.setDatabase(database);
+//        configuration.setPassword("banma_charge_Test");
+//
+//        /* ========= 连接池通用配置 ========= */
+//        GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();
+//        genericObjectPoolConfig.setMaxTotal(maxActive);
+//        genericObjectPoolConfig.setMinIdle(minIdle);
+//        genericObjectPoolConfig.setMaxIdle(maxIdle);
+//
+//        /* ========= lettuce pool ========= */
+//        LettucePoolingClientConfiguration.LettucePoolingClientConfigurationBuilder builder =
+//                LettucePoolingClientConfiguration.builder();
+//        builder.poolConfig(genericObjectPoolConfig);
+//        connectionFactory = new LettuceConnectionFactory(configuration, builder.build());
+//        connectionFactory.afterPropertiesSet();
+//    }
 
     @Bean
     @Primary
@@ -47,8 +72,8 @@ public class RedisAnnoConfig {
 //                .entryTtl(Duration.ZERO)  //默认没有过期时间2
                 .entryTtl(Duration.ofMinutes(10))  //设置默认过期时间为10min
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer()))
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(valueSerializer()))
-                .disableCachingNullValues();
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(valueSerializer()));
+//                .disableCachingNullValues();  //注释掉可以存储null值
 
 //        RedisCacheManager redisCacheManager = RedisCacheManager.builder(rcf)
 //                .cacheDefaults(config)
@@ -63,8 +88,6 @@ public class RedisAnnoConfig {
     }
 
     class MyRedisCacheManager extends RedisCacheManager {
-        private String separator = "#";
-
         public MyRedisCacheManager(RedisCacheWriter cacheWriter, RedisCacheConfiguration defaultCacheConfiguration) {
             super(cacheWriter, defaultCacheConfiguration);
         }
@@ -121,7 +144,7 @@ public class RedisAnnoConfig {
     }
 
     private RedisSerializer<Object> valueSerializer(){
-        return new GenericFastJsonRedisSerializer();
+        return new GenericJackson2JsonRedisSerializer();  //也可以选择GenericJackson2JsonRedisSerializer
     }
 
     @Bean

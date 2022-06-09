@@ -50,7 +50,8 @@ public class RedisController extends UnifiedReply {
     public ResponseEntityDto<UserVoEntity> getUser(@RequestParam int id){
         cacheService.getUserByRedis(id);
         cacheService.getUserByRedisValue(id);
-        cacheService.getUserByRedisTime(id);
+        cacheService.getUserByRedisTime(id,id);
+        cacheService.UserServicegetUserNull(id);
         return buildSuccesResp();
     }
 
@@ -88,6 +89,8 @@ public class RedisController extends UnifiedReply {
 
             // 3. 尝试加锁，最多等待3秒，上锁以后10秒自动解锁
             boolean res = lock.tryLock(3, 10, TimeUnit.SECONDS);
+            lock.tryLock(10, TimeUnit.SECONDS);
+
             if(res){    //成功
                 // do your business
 
