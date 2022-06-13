@@ -1,6 +1,6 @@
 package com.robben.service;
 
-import com.robben.utils.Contants;
+import com.robben.common.Contants;
 import com.robben.utils.OtherUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

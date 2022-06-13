@@ -1,4 +1,4 @@
-package com.robben.utils.jsonPath;
+package com.robben.config;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jayway.jsonpath.Configuration;

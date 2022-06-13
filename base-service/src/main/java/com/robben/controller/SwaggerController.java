@@ -2,18 +2,13 @@ package com.robben.controller;
 
 import com.robben.model.ParamVaildReqVo;
 import com.robben.model.req.UploadFil2Req;
-import com.robben.utils.reqResult.ResponseEntityDto;
-import com.robben.utils.reqResult.UnifiedReply;
+import com.robben.common.ResponseEntityDto;
+import com.robben.common.UnifiedReply;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Api(tags = "swagger示例区")

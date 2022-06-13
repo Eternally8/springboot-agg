@@ -1,6 +1,6 @@
 package com.robben.config.ThreadPool;
 
-import com.robben.utils.Contants;
+import com.robben.common.Contants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;

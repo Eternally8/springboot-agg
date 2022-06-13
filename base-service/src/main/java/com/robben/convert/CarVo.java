@@ -1,4 +1,4 @@
-package com.robben.utils.mapstruct;
+package com.robben.convert;
 
 import lombok.Data;
 

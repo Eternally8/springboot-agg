@@ -1,4 +1,4 @@
-package com.robben.utils.reqResult;
+package com.robben.common;
 
 
 import io.swagger.annotations.ApiModel;

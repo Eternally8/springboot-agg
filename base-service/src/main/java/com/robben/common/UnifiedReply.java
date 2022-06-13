@@ -1,4 +1,4 @@
-package com.robben.utils.reqResult;
+package com.robben.common;
 
 /**
  * Description： 统一回复体

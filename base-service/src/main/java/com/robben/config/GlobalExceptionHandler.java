@@ -1,7 +1,7 @@
 package com.robben.config;
 
 import com.robben.model.ResultEnum;
-import com.robben.utils.reqResult.ResponseEntityDto;
+import com.robben.common.ResponseEntityDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;

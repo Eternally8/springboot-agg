@@ -1,4 +1,4 @@
-package com.robben.utils.mapstruct;
+package com.robben.convert;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
