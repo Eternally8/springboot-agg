@@ -1,7 +1,7 @@
 package com.robben.controller;
 
 import cn.hutool.core.thread.ThreadUtil;
-import com.robben.utils.GuavaCacheUtils;
+import com.robben.utils.guava.GuavaCacheUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

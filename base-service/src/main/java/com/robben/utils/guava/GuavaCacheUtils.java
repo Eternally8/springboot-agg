@@ -1,4 +1,4 @@
-package com.robben.utils;
+package com.robben.utils.guava;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
