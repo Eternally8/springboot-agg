@@ -1,10 +1,13 @@
 package com.robben.utils.guava;
 
+import cn.hutool.core.date.StopWatch;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.common.hash.BloomFilter;
+import com.google.common.hash.Funnels;
 
 import java.util.List;
 import java.util.Set;
@@ -52,9 +55,31 @@ public class GuavaTools {
 //        Sets.union(setA, setB);
 //        Sets.difference(setA, setB);
 
+        //计时的功能不如hutool的好用
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        stopWatch.stop();
+        long totalTimeMillis = stopWatch.getTotalTimeMillis();
+        System.out.println(totalTimeMillis);
+
+        //布隆过滤器
+        //期望的误判率。 误判率不能为0，因为不可能达到。
+        double fpp=0.05;
+        BloomFilter<Integer> bloomFilter=BloomFilter.create(Funnels.integerFunnel(),1000000,fpp);
+        for (int i = 0; i < 100000; i++) {
+            bloomFilter.put(i);
+        }
+        int count=0;
+        for (int i = 100000; i < 200000; i++) {
+            if (bloomFilter.mightContain(i)) {
+                count++;
+                System.out.println(i + "误判了");
+            }
+        }
+        System.out.println("误判条数"+count);
 
 
-
+        //限流RateLimiter
 
 
     }
