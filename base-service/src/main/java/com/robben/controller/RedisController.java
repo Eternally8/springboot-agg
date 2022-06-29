@@ -150,14 +150,4 @@ public class RedisController extends UnifiedReply {
         return testValue;
     }
 
-
-
-    @ApiOperation("本地缓存")
-    @GetMapping(value = "/localCache")
-    public ResponseEntityDto<Boolean> localCache(@RequestParam String s){
-        return buildSuccesResp(localCacheService.getCacheValue(s));
-    }
-
-
-
 }
