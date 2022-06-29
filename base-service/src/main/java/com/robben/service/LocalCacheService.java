@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class LocalCacheService {
 
 
-    @Cacheable(value = "userCache",cacheManager = "caffeineCacheManager",key = "#p0")
+    @Cacheable(value = "userCache",cacheManager = "caffeineCacheManager")
     public String getCacheValue(String s,String s1) {
         System.out.println("本地缓存没走");
         return s;
