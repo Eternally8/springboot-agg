@@ -62,8 +62,7 @@ class Solution {
             int n1 = target - n0;
             if(map.containsKey(n1)) {
                 return new int[] {i, map.get(n1)};
-            }
-            else {
+            } else {
                 map.put(n0, i);
             }
         }
