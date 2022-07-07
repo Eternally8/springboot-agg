@@ -45,12 +45,15 @@
 
 package leetcode.editor.cn;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class TwoSum{
   public static void main(String[] args) {
        Solution solution = new TwoSum().new Solution();
+       int[] a = new int[]{2,7,9,11};
+      System.out.println(Arrays.toString(solution.twoSum(a,16)));
   }
   
 //leetcode submit region begin(Prohibit modification and deletion)
