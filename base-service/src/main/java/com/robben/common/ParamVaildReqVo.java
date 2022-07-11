@@ -1,4 +1,4 @@
-package com.robben.model;
+package com.robben.common;
 
 import com.robben.annotation.validParam.EnumValidAnnotation;
 import com.robben.annotation.ProductTypeEnum;

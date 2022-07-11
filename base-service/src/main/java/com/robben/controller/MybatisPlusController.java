@@ -1,12 +1,13 @@
 package com.robben.controller;
 
-import com.robben.model.DescInfoListVo;
-import com.robben.model.DescInfoVo;
-import com.robben.model.UserMbplusInfoEntity;
-import com.robben.service.MybatisPlusService;
-import com.robben.utils.DesUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.robben.common.ResponseEntityDto;
 import com.robben.common.UnifiedReply;
+import com.robben.dao.UserInfoMapper;
+import com.robben.entity.UserInfoEntity;
+import com.robben.entity.DescInfoListVo;
+import com.robben.entity.DescInfoVo;
+import com.robben.utils.DesUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -25,15 +26,14 @@ import java.util.List;
 @RequestMapping("/mybatisPlus")
 public class MybatisPlusController extends UnifiedReply {
     @Autowired
-    private MybatisPlusService mybatisPlusService;
-
+    private UserInfoMapper userInfoMapper;
     private static String sqlCryptoKey = "asdfasdf2qwer123@#asdf";
 
 
     @ApiOperation(value = "插入用户信息",notes = "插入用户信息详情")
     @GetMapping("/insertUser")
     public ResponseEntityDto insertUser(){
-        UserMbplusInfoEntity vo = new UserMbplusInfoEntity();
+        UserInfoEntity vo = new UserInfoEntity();
         vo.setAge(1);
         vo.setName("lalalalal");
         vo.setCreateTime(new Date());
@@ -58,38 +58,40 @@ public class MybatisPlusController extends UnifiedReply {
         descInfoListVo.setDlist(ld);
         vo.setDescInfoListVo(descInfoListVo);
 
-        mybatisPlusService.insertUser(vo);
+        userInfoMapper.insert(vo);
         return buildSuccesResp(vo);
     }
 
 
     @ApiOperation(value = "更新用户信息",notes = "更新用户信息,增加了时间字段的转换、JSON格式数据的使用")
     @PostMapping("/updateUser")
-    public ResponseEntityDto updateUser(@RequestBody UserMbplusInfoEntity vo){
-        UserMbplusInfoEntity result = mybatisPlusService.updateUser(vo);
+    public ResponseEntityDto updateUser(@RequestBody UserInfoEntity vo){
+        int result = userInfoMapper.updateById(vo);
+
+        userInfoMapper.update(vo,new LambdaQueryWrapper<UserInfoEntity>().eq(UserInfoEntity::getId,1));
+
         return buildSuccesResp(result);
+    }
+
+    @ApiOperation(value = "根据用户ID")
+    @GetMapping("/getUserById")
+    public ResponseEntityDto getUserById(@ApiParam int id){
+        return buildSuccesResp(userInfoMapper.selectById(id));
     }
 
 
     @ApiOperation(value = "根据用户名查信息")
     @GetMapping("/getUserByName")
     public ResponseEntityDto getUserByName(@ApiParam String name){
-        List<UserMbplusInfoEntity> list = mybatisPlusService.getUserByName(name);
-        for (UserMbplusInfoEntity u : list) {
-            System.out.println(u.getName());
-            System.out.println(u.getDescInfo().getAge());
-            System.out.println(u.getDescInfoList().get(0).getPhone());
-            System.out.println(u.getDescInfoListVo().getDlist().get(0).getPhone());
-        }
-
-        return buildSuccesResp(mybatisPlusService.getUserByName(name));
+        return buildSuccesResp(userInfoMapper.selectOne(new LambdaQueryWrapper<UserInfoEntity>()
+                .eq(UserInfoEntity::getName,name).apply(" limt 1")));
     }
 
 
     @ApiOperation(value = "执行任何sql")
     @PostMapping("/handleSql")
     public ResponseEntityDto handleSql(@RequestParam String sqlStr){
-        mybatisPlusService.handleSql(sqlStr);
+        userInfoMapper.handleSql(sqlStr);
         return buildSuccesResp();
     }
 

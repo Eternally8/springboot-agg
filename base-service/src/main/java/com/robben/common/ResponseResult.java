@@ -1,5 +1,6 @@
-package com.robben.model;
+package com.robben.common;
 
+import com.robben.model.ResultEnum;
 import lombok.Data;
 
 @Data

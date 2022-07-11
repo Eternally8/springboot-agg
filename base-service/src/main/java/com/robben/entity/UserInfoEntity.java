@@ -1,4 +1,4 @@
-package com.robben.model;
+package com.robben.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.robben.model.jsonChange.DescInfoVoListTypeHandler;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -14,17 +15,18 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-@TableName(value = "user_mbplus_info",autoResultMap = true)
-public class UserMbplusInfoEntity {
-
+@TableName(value = "user_info",autoResultMap = true)
+public class UserInfoEntity {
     //默认不是自增,需要增加这个。也可以增加全局配置（mybatis-plus.global-config.db-config.id-type = AUTO）
     @TableId(type = IdType.AUTO)
-    private Integer id;
+
+    private Long id;
     private String name;
-    private boolean sex;
+    private Boolean sex;
     private Integer age;
     private String workInfo;
 
+    private Integer groupInfo;
     /**
      * mysql存储json格式字段---对应实体类关系
      *  这个功能是MySQL5.7.8后增加的,在MySQL8.0中得到了大幅增强 https://blog.csdn.net/qq_38688267/article/details/107386138
@@ -45,10 +47,12 @@ public class UserMbplusInfoEntity {
     @TableField(typeHandler = FastjsonTypeHandler.class)
     private DescInfoListVo descInfoListVo;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "创建时间")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")  //前后到后台的时间格式的转换(作为对象入参的时候传唤)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")      ///后台到前台的时间格式的转换
     private Date createTime;
 
+    @ApiModelProperty(value = "更新时间")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;

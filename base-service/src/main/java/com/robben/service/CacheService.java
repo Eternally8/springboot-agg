@@ -1,7 +1,7 @@
 package com.robben.service;
 
-import com.robben.dao.UserDao;
-import com.robben.model.UserVoEntity;
+import com.robben.dao.UserInfoMapper;
+import com.robben.entity.UserInfoEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -12,35 +12,35 @@ import org.springframework.stereotype.Service;
 public class CacheService {
 
     @Autowired
-    private UserDao userDao;
+    private UserInfoMapper userInfoMapper;
 
     //目前缓存必须带value
     @Cacheable(value = "test",keyGenerator = "cacheKeyGenerator")
-    public UserVoEntity getUserByRedis(int id) {
+    public UserInfoEntity getUserByRedis(int id) {
         log.info("~~~~~~~~handle-DB~~~~~~~~~~~~~~");
-        return userDao.getUserById(id);
+        return userInfoMapper.getUserById(id);
     }
 
     @Cacheable(value = "UserService_getUserByRedisValue")
-    public UserVoEntity getUserByRedisValue(int id) {
-        return userDao.getUserById(id);
+    public UserInfoEntity getUserByRedisValue(int id) {
+        return userInfoMapper.getUserById(id);
     }
 
 
     @Cacheable(value = "UserService_getUserByRedisTime#s#100")
-    public UserVoEntity getUserByRedisTime(int id, int id2) {
-        return userDao.getUserById(id);
+    public UserInfoEntity getUserByRedisTime(int id, int id2) {
+        return userInfoMapper.getUserById(id);
     }
 
     @Cacheable(value = "UserService_getUserNull#s#100")
-    public UserVoEntity UserServicegetUserNull(int id) {
+    public UserInfoEntity UserServicegetUserNull(int id) {
         System.out.println(1);
         return null;
     }
 
 
     @Cacheable(value = "UserService_getUserByRedisTimeObject#s#100",key = "#p0.id +'::'+#p0.name")
-    public UserVoEntity getUserByRedisTimeObject(UserVoEntity vo) {
+    public UserInfoEntity getUserByRedisTimeObject(UserInfoEntity vo) {
         log.info("~~~~~~~~handle-DB~~~~~~~~~~~~~~");
         return vo;
     }

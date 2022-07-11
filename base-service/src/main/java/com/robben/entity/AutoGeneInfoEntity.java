@@ -32,6 +32,9 @@ public class AutoGeneInfoEntity {
     private String workInfo;
 
 
+    private Integer typeFlag;
+
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")  //前端到后端的格式转换--接收前台数据
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")   //DB到前端的格式转换,注意是否需要增加时区timezone="GMT+8"
     private Date createTime;

@@ -1,6 +1,6 @@
 package com.robben.controller;
 
-import com.robben.model.ParamVaildReqVo;
+import com.robben.common.ParamVaildReqVo;
 import com.robben.model.req.UploadFil2Req;
 import com.robben.common.ResponseEntityDto;
 import com.robben.common.UnifiedReply;
