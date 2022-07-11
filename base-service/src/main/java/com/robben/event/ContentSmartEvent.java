@@ -1,22 +1,22 @@
 package com.robben.event;
 
-import com.robben.model.UserVoEntity;
+import com.robben.entity.UserInfoEntity;
 import org.springframework.context.ApplicationEvent;
 
 public class ContentSmartEvent extends ApplicationEvent {
 
-    private UserVoEntity userVoEntity;
+    private UserInfoEntity userInfoEntity;
 
-    public ContentSmartEvent(Object source, UserVoEntity userVoEntity) {
+    public ContentSmartEvent(Object source, UserInfoEntity UserInfoEntity) {
         super(source);
-        this.userVoEntity = userVoEntity;
+        this.userInfoEntity = UserInfoEntity;
     }
 
-    public UserVoEntity getUserVo() {
-        return userVoEntity;
+    public UserInfoEntity getUserVo() {
+        return userInfoEntity;
     }
 
-    public void setUserVo(UserVoEntity userVoEntity) {
-        this.userVoEntity = userVoEntity;
+    public void setUserVo(UserInfoEntity UserInfoEntity) {
+        this.userInfoEntity = UserInfoEntity;
     }
 }

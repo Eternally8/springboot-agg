@@ -1,7 +1,7 @@
 package com.robben.controller;
 
 import com.robben.config.RedisConfig.RedisMQChannels;
-import com.robben.model.UserVoEntity;
+import com.robben.entity.UserInfoEntity;
 import com.robben.service.CacheService;
 import com.robben.service.LocalCacheService;
 import com.robben.common.Contants;
@@ -46,7 +46,7 @@ public class RedisController extends UnifiedReply {
 
     @ApiOperation(value = "redis注解缓存",notes = "可自定义缓存失效时间和key生成器")
     @GetMapping(value = "/getUser")
-    public ResponseEntityDto<UserVoEntity> getUser(@RequestParam int id){
+    public ResponseEntityDto<UserInfoEntity> getUser(@RequestParam int id){
         cacheService.getUserByRedis(id);
         cacheService.getUserByRedisValue(id);
         cacheService.getUserByRedisTime(id,id);
@@ -56,10 +56,10 @@ public class RedisController extends UnifiedReply {
 
     @ApiOperation(value = "redis注解缓存2",notes = "可自定义缓存失效时间和key生成器")
     @GetMapping(value = "/getUser2")
-    public ResponseEntityDto<UserVoEntity> getUser2(){
-        UserVoEntity vo = new UserVoEntity();
+    public ResponseEntityDto<UserInfoEntity> getUser2(){
+        UserInfoEntity vo = new UserInfoEntity();
         vo.setAge(1);
-        vo.setId(2);
+        vo.setId(2L);
         vo.setName("kkkkk");
         return buildSuccesResp(cacheService.getUserByRedisTimeObject(vo));
     }

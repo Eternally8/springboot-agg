@@ -3,6 +3,7 @@ package com.robben.model;
 import com.robben.annotation.validParam.EnumValidAnnotation;
 import com.robben.annotation.ProductTypeEnum;
 import com.robben.annotation.validParam.ValidGroup;
+import com.robben.entity.UserInfoEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -69,7 +70,7 @@ public class ValidVo {
     //若需要校验嵌套的对象中的属性,则需要加上@Valid
     @Valid
     @NotEmpty(message = "list不能为空")
-    private UserVoEntity userVoEntity;
+    private UserInfoEntity userInfoEntity;
 
 
 }

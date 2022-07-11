@@ -1,9 +1,9 @@
 package com.robben.controller;
 
+import com.robben.entity.UserInfoEntity;
 import com.robben.event.ContentAnnoEvent;
 import com.robben.event.ContentEvent;
 import com.robben.event.ContentSmartEvent;
-import com.robben.model.UserVoEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -40,8 +40,8 @@ public class EventController {
     public String sendSmartEvent(String context){
         log.info("sendSmartEvent_request:{}",context);
 
-        UserVoEntity vo = new UserVoEntity();
-        vo.setId(1);
+        UserInfoEntity vo = new UserInfoEntity();
+        vo.setId(1l);
         vo.setName("aaa");
 
         applicationContext.publishEvent(new ContentSmartEvent(this,vo));
@@ -55,8 +55,8 @@ public class EventController {
     public String sendAnnoEvent(String context){
         log.info("sendAnnoEvent_request:{}",context);
 
-        UserVoEntity vo = new UserVoEntity();
-        vo.setId(2);
+        UserInfoEntity vo = new UserInfoEntity();
+        vo.setId(2L);
         vo.setName("bbb");
 
         applicationContext.publishEvent(new ContentAnnoEvent(this,vo));
