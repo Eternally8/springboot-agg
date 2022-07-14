@@ -30,16 +30,12 @@ public class FastjsonConverter {
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         // WriteMapNullValue把空的值的key也返回  需要其他的序列化规则按照格式设置即可
         fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteMapNullValue);
-        List<MediaType> fastMediaTypes = new ArrayList<>();
         // 处理中文乱码问题
         fastJsonConfig.setCharset(StandardCharsets.UTF_8);
-        fastMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
-        fastConverter.setSupportedMediaTypes(fastMediaTypes);
         // 在转换器中添加配置信息
         fastConverter.setFastJsonConfig(fastJsonConfig);
         StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
         stringConverter.setDefaultCharset(StandardCharsets.UTF_8);
-        stringConverter.setSupportedMediaTypes(fastMediaTypes);
         // 将转换器添加到converters中
         return new HttpMessageConverters(stringConverter, fastConverter);
     }
