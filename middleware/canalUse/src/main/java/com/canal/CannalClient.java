@@ -20,12 +20,13 @@ import java.util.List;
 @Component
 public class CannalClient implements InitializingBean {
 
-    private final static int BATCH_SIZE = 1000;
+    private final static int BATCH_SIZE = 1;
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        // 创建链接
-        CanalConnector connector = CanalConnectors.newSingleConnector(new InetSocketAddress("127.0.0.1", 3306), "springBootDemo", "username", "pwd");
+        // 创建链接(example是配置项不是数据库)
+        CanalConnector connector = CanalConnectors.newSingleConnector(new InetSocketAddress("127.0.0.1", 11111),
+                "example", "canal", "****");
         try {
             //打开连接
             connector.connect();
