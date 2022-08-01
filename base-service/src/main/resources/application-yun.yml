@@ -11,7 +11,7 @@ extraEnvHost: 212.64.18.166
 app:
   id: base-service
 apollo:
-  meta: http://${extraEnvHost}:8080
+  meta: http://${extraEnvHost}:38080
   bootstrap:
     namespaces: application,common-mysql,common-redis
     enabled: true
